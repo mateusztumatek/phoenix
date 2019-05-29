@@ -1,0 +1,38 @@
+.ui-autocomplete {
+  margin-bottom: 100px;
+  flex-wrap: wrap;
+  display: flex;
+}
+.ui-autocomplete img {
+  width: 100%;
+}
+.ui-autocomplete .search_div {
+  position: relative;
+}
+.ui-autocomplete .search_div:hover img {
+  opacity: 0.3 !important;
+}
+.ui-autocomplete .search_div:hover .overlay {
+  opacity: 1;
+}
+.ui-autocomplete .overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 200ms;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  top: 0px;
+  left: 0px;
+  padding: 20px;
+}
+.ui-autocomplete .overlay p {
+  padding: 10px;
+  background-color: black;
+  font-size: 1rem;
+  color: white;
+}
+
+/*# sourceMappingURL=autocomplete.css.map */

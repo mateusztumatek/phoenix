@@ -1,0 +1,49 @@
+.icc {
+  opacity: 0.6;
+  transition: all 200ms;
+}
+.icc:hover {
+  opacity: 1;
+}
+
+.active {
+  opacity: 1;
+}
+
+.md-ripple {
+  color: white !important;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.md-card {
+  width: 320px;
+  margin: 4px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.md-stepper {
+  padding: 7px !important;
+}
+
+.dropzone {
+  background-color: transparent !important;
+}
+
+.dz-add {
+  bottom: 65px !important;
+}
+
+/*# sourceMappingURL=admin-creator.css.map */
