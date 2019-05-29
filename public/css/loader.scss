@@ -1,0 +1,47 @@
+.loader{
+  display: none;
+  position: fixed;
+
+
+  .content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  z-index: 10000000;
+  width: 100%;
+  height: 100%;
+
+}
+
+.site-loader{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000000;
+
+  img{
+    animation-duration: 1s;
+    animation-iteration-count: 5;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-name: szop-anim;
+  }
+}
+
+@keyframes szop-anim {
+  0%{
+
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(360deg);
+  }
+}

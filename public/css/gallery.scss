@@ -1,0 +1,133 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+
+/* Useful Classes */
+.xy-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.photos {
+  /* Prevent vertical gaps */
+  line-height: 0;
+
+  -webkit-column-count: 3;
+  -webkit-column-gap:   10px;
+  -moz-column-count:    3;
+  -moz-column-gap:      10px;
+  column-count:         3;
+  column-gap:           10px;
+}
+
+.photo{
+  /* Just in case there are inline attributes */
+  overflow: hidden;
+  width: 100% !important;
+  position: relative;
+  height: auto !important;
+  transition: all 200ms;
+  box-sizing: border-box;
+
+  &:hover{
+    img{
+      -webkit-filter: none;
+      -moz-filter: none;
+      -o-filter: none;
+      -ms-filter: none;
+      filter: none;
+    }
+    z-index: 1000;
+    .content{
+      top: 0px;
+      opacity: 1;
+    }
+  }
+  img{
+    width: 100%;
+    height: auto;
+  }
+  .content{
+    padding: 10px;
+    transition: all 400ms;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    opacity: 0;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(black, 0.7);
+    h2{
+      color: white !important;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    p{
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 0px !important;
+    }
+  }
+}
+.transition {
+  transition: all 350ms ease-in-out;
+}
+
+.r-3-2 {
+  width: 100%;
+  padding-bottom: 66.667%;
+  background-color: white;
+}
+
+.image-holder {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Main Styles */
+.gallery-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery {
+  position: relative;
+  white-space: nowrap;
+  font-size: 0;
+}
+
+.item-wrapper {
+  cursor: pointer;
+  width: 23%; /* arbitrary value */
+  display: inline-block;
+  background-color: white;
+}
+
+.gallery-item { opacity: 0.5; }
+.gallery-item.active { opacity: 1; }
+
+.controls {
+  font-size: 0;
+  border-top: none;
+}
+.move-btn {
+  display: inline-block;
+  width: 50%;
+  border: none;
+  color: #ccc;
+  background-color: transparent;
+  padding: 0.2em 1.5em;
+}
+.move-btn:first-child {border-right: none;}
+.move-btn.left  { cursor: w-resize; }
+.move-btn.right { cursor: e-resize; }
+

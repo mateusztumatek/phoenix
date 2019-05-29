@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3bd14aea-dbf3-4ac9-b0b6-e6b0e153e142" name="haft71.pl" url="http://yaxint.nazwa.pl">
+        <fileTransfer host="yaxint.nazwa.pl" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="b054d391-703b-42bc-846c-b38f36fa265f" name="phoenix" url="http://mateusztumat.nazwa.pl">
+        <fileTransfer host="mateusztumat.nazwa.pl" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="3dadce9e-b33f-4a2f-b8bf-627855cee265" name="mateusztumatek" url="http://mateusztumat.nazwa.pl">
+        <fileTransfer host="mateusztumat.nazwa.pl" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

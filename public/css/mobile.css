@@ -1,0 +1,349 @@
+@charset "UTF-8";
+@media screen and (max-width: 800px) {
+  a {
+    font-size: 0.6rem !important;
+  }
+
+  #mobile_side_menu_trigger {
+    position: relative;
+    padding: 10px;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    font-size: 18px;
+  }
+  #mobile_side_menu_trigger span {
+    font-family: "Open Sans", sans-serif;
+    margin-left: 5px;
+    font-weight: lighter;
+  }
+
+  .menu-content {
+    transition: all 200ms !important;
+    bottom: 0px;
+    padding: 10px !important;
+    width: 100%;
+    background-color: #161616;
+  }
+
+  .give-me-space {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .fixed-top {
+    position: relative !important;
+  }
+
+  .contra {
+    background-size: contain;
+    padding: 10px 0px !important;
+  }
+
+  .static-banner {
+    height: 300px !important;
+  }
+
+  .arrow {
+    font-family: FontAwesome;
+    content: "";
+    display: inline-block !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+    float: right;
+  }
+
+  .navbar {
+    overflow-y: scroll !important;
+    padding: 0px !important;
+  }
+
+  .menu-content {
+    width: 100%;
+  }
+
+  input {
+    width: 100% !important;
+  }
+
+  .carousel-inner {
+    height: 220px !important;
+  }
+  .carousel-inner a, .carousel-inner h1, .carousel-inner h2, .carousel-inner p {
+    font-size: 9px !important;
+  }
+  .carousel-inner .carousel-item img {
+    width: 100% !important;
+  }
+  .carousel-inner .carousel-item-content {
+    display: none !important;
+  }
+
+  .carousel-after {
+    bottom: 0px !important;
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    background-color: transparent !important;
+  }
+
+  .slide-down:after {
+    font-size: 20px !important;
+  }
+
+  .contentCircle {
+    width: 100% !important;
+  }
+
+  .give-me-space {
+    padding: 15px 0px !important;
+  }
+
+  .iq-features {
+    padding: 0px !important;
+  }
+  .iq-features p, .iq-features span {
+    font-size: 12px !important;
+  }
+  .iq-features .background-image {
+    display: none !important;
+  }
+  .iq-features .round {
+    display: none !important;
+  }
+  .iq-features .dotCircle {
+    position: relative !important;
+    display: flex;
+    flex-wrap: wrap;
+    transform: rotate(0deg) !important;
+  }
+  .iq-features .dotCircle .itemDot {
+    width: 100%;
+    margin: 5px !important;
+    transform: rotate(0deg) !important;
+    position: unset !important;
+  }
+  .iq-features .dotCircle .itemDot img {
+    max-width: 20% !important;
+  }
+
+  .footer-logo {
+    display: none !important;
+  }
+
+  .forActive {
+    display: none !important;
+  }
+
+  .holderCircle {
+    margin: 0px !important;
+    max-width: 100% !important;
+  }
+
+  footer {
+    margin-top: 20px !important;
+  }
+
+  .static-banner img {
+    height: 100% !important;
+    width: auto;
+  }
+
+  .ui-autocomplete {
+    width: 300px !important;
+  }
+
+  .header1 {
+    font-size: 0.9rem !important;
+  }
+  .header1 span {
+    margin-bottom: 10px !important;
+    font-size: 0.4rem !important;
+  }
+
+  .slick-slide {
+    margin: 0px !important;
+    height: auto !important;
+  }
+  .slick-slide .content {
+    top: -400px;
+  }
+  .slick-slide .content a {
+    font-size: unset !important;
+  }
+  .slick-slide .content .header {
+    font-size: 0.8rem !important;
+    margin: 0px !important;
+  }
+  .slick-slide .content .description {
+    margin: 5px 0px !important;
+    font-size: 0.7rem !important;
+  }
+  .slick-slide .content .price {
+    font-size: unset !important;
+  }
+
+  .logo {
+    max-width: 50px !important;
+  }
+
+  .navbar-toggler {
+    font-size: 1rem !important;
+    padding: 10px !important;
+  }
+
+  .static-banner {
+    padding: 20px !important;
+  }
+  .static-banner h3 {
+    font-size: 2rem !important;
+  }
+
+  .xs-hidden {
+    display: none !important;
+  }
+
+  #ig_slider .carousel-inner {
+    height: 170px !important;
+  }
+
+  .dropdown-menu {
+    display: none !important;
+    position: relative !important;
+    transform: scale(1) !important;
+  }
+
+  .dropdown-content {
+    background-color: transparent !important;
+    width: 100% !important;
+  }
+  .dropdown-content li {
+    height: 25px !important;
+    padding: 5px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .dropdown-content a {
+    font-size: 0.7rem !important;
+    color: white !important;
+  }
+
+  .show {
+    display: block !important;
+  }
+
+  .modal-dialog {
+    margin: 7px !important;
+    max-width: 100% !important;
+  }
+
+  .menu-show {
+    left: 0px;
+    background-color: black !important;
+  }
+
+  .my-button {
+    font-size: 12px !important;
+  }
+
+  .close-modal {
+    font-size: 2rem !important;
+  }
+
+  .photos {
+    -webkit-column-count: 1 !important;
+    -webkit-column-gap: 10px;
+    -moz-column-count: 1 !important;
+    -moz-column-gap: 10px;
+    column-count: 1 !important;
+    column-gap: 10px;
+  }
+
+  .holderCircle {
+    height: unset !important;
+  }
+
+  .contentCircle {
+    position: inherit !important;
+    top: unset !important;
+    left: unset !important;
+    transform: unset !important;
+    height: 200px !important;
+  }
+
+  .iq-features {
+    height: unset !important;
+  }
+
+  .btn {
+    color: #d6d6d6 !important;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .arrow {
+    display: none;
+  }
+}
+@media screen and (max-width: 1460px) and (min-width: 800px) {
+  .photos {
+    -webkit-column-count: 2 !important;
+    -webkit-column-gap: 10px;
+    -moz-column-count: 2 !important;
+    -moz-column-gap: 10px;
+    column-count: 2 !important;
+    column-gap: 10px;
+  }
+
+  .static-banner {
+    height: 400px !important;
+  }
+
+  .give-me-space {
+    padding: 30px 0px !important;
+  }
+
+  .carousel h2 {
+    font-size: 2rem !important;
+  }
+
+  #ig_slider .carousel-inner {
+    height: 300px !important;
+  }
+  #ig_slider .carousel-inner img {
+    height: 100% !important;
+  }
+
+  .carousel-inner {
+    max-height: 1000px !important;
+  }
+}
+@media screen and (max-width: 800px) {
+  .navbar {
+    background-color: black !important;
+  }
+
+  .left-border {
+    border: none !important;
+  }
+
+  .container {
+    max-width: 90% !important;
+  }
+
+  #ig_slider {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 2000px) and (min-width: 1600px) {
+  .container {
+    max-width: 70% !important;
+  }
+}
+@media screen and (min-width: 500px) {
+  .sm-hidden {
+    display: none !important;
+  }
+}
+
+/*# sourceMappingURL=mobile.css.map */

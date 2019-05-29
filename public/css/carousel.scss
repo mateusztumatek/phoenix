@@ -1,0 +1,131 @@
+$primary-color: #836e5d;
+$secondary-color: #0c0c0c;
+$white-color: #d6d6d6;
+#carousel{
+  max-height: 1000px;
+  .carousel-control-next, .carousel-control-prev{
+    height: 10%;
+    top: 45%;
+    background-color: rgba(0,0,0,0.5);
+    width: 7%;
+  }
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    background-size: 100%, 100%;
+    background-image: none;
+  }
+
+  .carousel-control-next-icon:after
+  {
+    content: '\f105';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: inherit;
+    font-size: 55px;
+    color: $primary-color;
+  }
+
+  .carousel-control-prev-icon:after {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: inherit;
+    content: '\f104';
+    font-size: 55px;
+    color: $primary-color;
+  }
+  img{
+    width: 100%;
+    max-height: 1000px;
+    object-fit: cover;
+  }
+  .carousel-item-content{
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    justify-content: start;
+    align-items: center;
+    position: absolute;
+    display: flex;
+    .content{
+      overflow: hidden;
+      text-align: left !important;
+      width: 35%;
+      margin-left: 16%;
+      color: white ;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      height: 100%;
+      h2{
+        font-weight: 800;
+        font-size: 3rem;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        color: $primary-color;
+
+        font-size: 3rem;
+      }
+      p{
+        color: white !important;
+      }
+    }
+  }
+
+  .text-white-important{
+    margin-bottom: 20px;
+    color: white !important;
+    p,a,span{
+
+      font-weight: 200;
+      font-size: 0.9rem;
+      color: white !important;
+    }
+  }
+  .carousel-after{
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 30px;
+
+  }
+}
+.slide-down{
+  &:hover{
+    opacity: 0.6;
+    transition: all 200ms;
+  }
+  &:after{
+    content: "\f103";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: $primary-color;
+    font-size: 100px;
+  }
+
+
+}
+.delay-100{
+  animation-delay: 100ms;
+}
+.delay-200{
+  animation-delay: 200ms;
+}
+.delay-300{
+  animation-delay: 300ms;
+}
+.delay-400{
+  animation-delay: 400ms;
+}
+.delay-500{
+  animation-delay: 500ms;
+}
+.delay-600{
+  animation-delay: 600ms;
+}

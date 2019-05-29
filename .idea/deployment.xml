@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="haft71.pl" showNewOnTargetInSync="false">
+    <serverData>
+      <paths name="haft71.pl">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../angular-app" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="mateusztumatek">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../angular-app" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="phoenix">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
