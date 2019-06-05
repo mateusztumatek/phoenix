@@ -62,3 +62,5 @@
         </div>
 
     </nav>
+
+<cart v-on:change-cart="itemsChange" :cart="cart" v-on:my-event="show()" :showCart="showCart"></cart>

@@ -5,23 +5,8 @@
                 <div class="product-image4">
                     <div style="cursor: pointer" data-product_id = "{{$product->id}}" data-slug = "{{\App\Services\Help::slugify($product->name)}}" onclick ="quick_view(this, event)" class="overlay"></div>
                     <a data-product_id = "{{$product->id}}" data-slug = "{{\App\Services\Help::slugify($product->name)}}" onclick ="quick_view(this, event)" href="{{$product->getLink()}}">
-
                             <img class="pic-1" src="{{$product->getProductImages()[0]}}">
-
                     </a>
-                    <ul class="social">
-
-
-
-                        <form class="add-to-cart_form" onsubmit="sendform(this, event)" action="{{route('add_item_to_cart')}}" method="POST">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="product_id" value="{{$product->macma_id}}">
-                            <input type="hidden" name="quanity" value="1">
-                            <input type="hidden" name="colour" value="{{$product->color_hex}}">
-                        </form>
-
-
-                    </ul>
                     <div class="product-labels">
                     @if($product->new)
                      <span>Nowość</span>
@@ -30,8 +15,6 @@
                             <span>Niedostępny</span>
                         @endif
                     </div>
-
-
                 </div>
                 <div class="product-content">
                     <h2 class="title"><a href="#" style="cursor: pointer" data-product_id = "{{$product->id}}" data-slug = "{{\App\Services\Help::slugify($product->name)}}" onclick ="quick_view(this, event)">{{str_limit($product->name, 28)}}</a></h2>
@@ -46,19 +29,10 @@
                                 </div>
                             @endif
                         </div>
-
-                        <form action="{{route('add_to_favourite')}}" method="POST" onsubmit="send_favourite(this,event)">
-                            @CSRF
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-{{--
-                            <span onclick="$(this).childNodes().addClass('heart-icon-active'); $(this).parent().submit()" class="float-right p-2"><i class="fa fa-heart heart-icon @if(\Illuminate\Support\Facades\Session::has('saved')) @if(\Illuminate\Support\Facades\Session::get('saved')->contains('id', $product->id))heart-icon-active @endif @endif"></i></span>
---}}
-
-                            <span data-toggle="tooltip" data-placement="top" title="Dodaj przedmiot do ulubionych" onclick="$(this).children().addClass('heart-icon-active'); $(this).parent().submit()" class="float-right p-2"><i class="fa fa-heart heart-icon @if(\Illuminate\Support\Facades\Session::has('saved')) @if(\Illuminate\Support\Facades\Session::get('saved')->contains('id', $product->id))heart-icon-active @endif @endif"></i></span>
-                        </form>
-
+                        <md-button @click="addToCart({{$product}})" class="md-icon-button  md-raised md-primar">
+                            <i  class="fas fa-shopping-cart"></i>
+                        </md-button>
                     </div>
-
                 </div>
             </div>
         </div>

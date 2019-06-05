@@ -12,34 +12,45 @@ use Session;
 class CartController extends Controller
 {
 
-    public function show(Request $request){
-/*        $request->session()->forget('cart');*/
-        if(!$request->session()->exists('cart')){
-            $request->session()->put('cart',new Cart());
-            $cart = Session::get('cart');
-        }else {
-            $cart = $request->session()->get('cart');
-        }
-        return view('Cart.index', compact('cart'));
-
-
-
+    public function index(){
+        $cart = \Illuminate\Support\Facades\Session::get('cart');
+        return response()->json($cart);
     }
     public function addItem(Request $request){
         if(!$request->session()->exists('cart')){
             $request->session()->put('cart',new Cart());
         }
-
         $cart = $request->session()->get('cart');
-        $product = Product::where('macma_id', $request->product_id)->first();
-        $product->init();
-        $cart->addItem($product, $request->quanity, $request->colour);
+        if($request->type == 'product'){
+            $product = Product::where('id', $request->product_id)->first();
+            foreach ($cart->items as $item) if($item->id == $product->id) return response()->json(false);
+            $product->init();
+            $cart->addItem($product, $request->quantity, $request->length, 'product');
+        }elseif($request->type == 'design'){
+            if($request->product_id != null){
+                $product = Product::find($request->product_id);
+                $product->init();
+            } else $product = null;
+            $cart->addDesign($product, $request->length, $request->quantity);
+        }
+
         return response()->json($cart);
     }
+    public function update(Request $request, $id){
+        if(!$request->session()->exists('cart')){
+            $request->session()->put('cart',new Cart());
+        }
+        $cart = $request->session()->get('cart');
 
-    public function deleteItem(Request $request){
+        $cart->items[$id]->quantity = $request->item['quantity'];
+        $cart->items[$id]->length = $request->item['length'];
+
+        $cart->refresh();
+        return response()->json($cart);
+    }
+    public function deleteItem(Request $request, $id){
         $old_cart = Session::has('cart') ? Session::get('cart') : null;
-        $old_cart->deleteItem($request->item_id);
+        $old_cart->deleteItem($id);
         return response()->json($old_cart);
     }
     public function refresh(Request $request){
@@ -71,20 +82,4 @@ class CartController extends Controller
         return back()->with('Cart.index', compact('cart'));
     }
 
-    public function changeColour(Request $request, $item){
-        if(!$request->session()->exists('cart')){
-            $request->session()->put('cart',new Cart());
-        }
-
-        $cart = $request->session()->get('cart');
-        $i = $cart->getItem($item);
-        $i->colour = $request->colour_hex;
-        $i->color = $request->colour;
-        $i->color_hex = $request->colour_hex;
-
-        $cart->items[$item] = $i;
-
-
-        return back()->with(['message' => 'kolor zostal zmieniony']);
-    }
 }

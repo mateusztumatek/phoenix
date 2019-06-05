@@ -235,7 +235,8 @@
                         obj.type = 'rect';
                         obj.y = this.selectedObject.y;
                         obj.cornerRadius = this.selectedObject.cornerRadius;
-
+                        obj.konvaWidth = this.configKonva.width;
+                        obj.konvaHeight = this.configKonva.height;
                     }
                     if(this.selectedObject.name == 'circle'){
                         obj.width = (this.selectedObject.radius * this.selectedObject.scaleX) * 2;
@@ -246,6 +247,8 @@
                         obj.type = 'circle';
                         obj.x = this.selectedObject.x;
                         obj.y = this.selectedObject.y;
+                        obj.konvaWidth = this.configKonva.width;
+                        obj.konvaHeight = this.configKonva.height;
                     }
                 }
 

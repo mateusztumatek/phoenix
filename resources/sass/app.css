@@ -327,7 +327,7 @@
   --md-theme-default-dark-primary: #836e5d ;
   --md-theme-default-dark-accent: #d6d6d6 ;
   --md-theme-default-dark-theme: light ;
-  --md-theme-default-dark-transparent: #292929 ;
+  --md-theme-default-dark-transparent: #161616 ;
 }
 
 .md-theme-default-dark :not(input):not(textarea)::selection {
@@ -1766,7 +1766,7 @@ html.md-theme-default-dark {
   background-color: white;
 }
 .draw-block-header h2 {
-  color: #292929;
+  color: #161616;
   font-size: 1rem;
   font-weight: bold;
   margin: 0px;
@@ -1778,7 +1778,7 @@ html.md-theme-default-dark {
 
 .konva-wrapper {
   height: fit-content;
-  background-color: #292929;
+  background-color: #161616;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 

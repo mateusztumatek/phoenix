@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'payment' => \App\Http\Middleware\VerifyPaymentID::class,
         'Auth' => \App\Http\Middleware\Auth::class,
+        'Cart' => \App\Http\Middleware\CartMiddleware::class,
 
     ];
 }

@@ -115,6 +115,22 @@
         @endforeach
         <li class="nav-item d-flex align-items-center">
                 <i onclick="$('#search_modal').modal()" class="fas fa-search white-color" aria-hidden="true"></i>
-
+        </li>
+        <li class="nav-item d-flex align-items-center position-relative">
+            <md-badge  :md-content="cart.itemsCount">
+                <md-button @click="show()" class="md-icon-button position-relative" style="overflow: visible">
+                    <i class="fas fa-shopping-cart"></i>
+                </md-button>
+            </md-badge>
+                <div class="cart-info animated fadeIn" style="animation-duration: 300ms; display:none" v-bind:style="{display: (cartMessage == null)? 'none' : 'block'}" v-if="cartMessage != null">
+                    <div class="d-flex flex-wrap">
+                        <div class="col-md-3 d-flex align-items-center">
+                            <i style="font-size: 2rem" class="fa fa-thumbs-up w-100"></i>
+                        </div>
+                            <div  class="col-md-9 d-flex align-items-center">
+                                <h3 class="font-weight-bold m-0" style="font-size: 1rem">@{{cartMessage}}</h3>
+                            </div>
+                    </div>
+                </div>
         </li>
         @include('saved')

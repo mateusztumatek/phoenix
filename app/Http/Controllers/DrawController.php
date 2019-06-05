@@ -19,6 +19,7 @@ class DrawController extends Controller
     public function index(Request $request)
     {
         $hash = md5(str_random(20));
+        $files = array();
         if (!Session::has('project')) {
 
             $project = array();
@@ -31,7 +32,6 @@ class DrawController extends Controller
         } else {
             $project = Session::get('project');
             if (file_exists(public_path('/temp/' . $project['hash']))) {
-                $files = array();
                 foreach (scandir(public_path('/temp/' . $project['hash'])) as $key => $file) {
                     if ($key >= 2) {
                         array_push($files, url('/temp/' . $project['hash'] . '/' . $file));

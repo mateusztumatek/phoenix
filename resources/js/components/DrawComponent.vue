@@ -7,9 +7,9 @@
                         <items :selectedItem="sItem" v-on:changeSItem="updateSItem($event)"></items>
                 </md-step>
 
-                <md-step id="second" md-label="Second Step" :md-done.sync="second" >
-                    <div class="w-100 d-flex">
-                        <div class="col-md-6 pl-0">
+                <md-step id="second" md-label="Second Step" @click="back()" :md-done.sync="second" >
+                    <div class="w-100 d-flex flex-wrap">
+                        <div class="col-md-6 col-sm-12 pl-0">
 
                             <transition name="fade">
                                 <div v-if="loading" class="load">
@@ -37,7 +37,8 @@
                                     </div>-->
                                   <!--  <md-button :disabled="loading" @click="addText()" class="md-raised md-accent">Dodaj tekst</md-button>-->
 
-                                    <md-button :disabled="loading" @click="clipLayer()" class="md-raised md-accent">{{(configLayer.clipFunc ==null)? 'Przytnij projekt' : 'Pokaż całość'}}</md-button>
+                                    <md-button style="margin: 0px;margin-top: 10px; height: 80px; width: 100%;" :disabled="loading" @click="clipLayer()" class="md-raised md-accent">{{(configLayer.clipFunc ==null)? 'Przytnij projekt' : 'Pokaż całość'}}</md-button>
+                                    <md-button style="margin: 0px;margin-top: 10px; height: 80px; width: 100%;" @click="makePreview()" class="md-raised md-accent">Dalej</md-button>
 
                                 </div>
                             </md-content>
@@ -100,7 +101,7 @@
                                 </div>
                             </md-content>
                         </div>
-                        <div class="col-md-6 p-0 konva-wrapper">
+                        <div class="col-md-6 col-sm-12 p-0 konva-wrapper">
                             <v-stage :config="configKonva" ref="stage" @mousedown="handleStageMouseDown" @mouseup="updateElements()">
                                 <v-layer>
                                     <v-image :config="image" ></v-image>
@@ -121,9 +122,22 @@
                 </md-step>
 
                 <md-step id="third" md-label="Third Step" :md-done.sync="third">
+                    <make-order :design="design" :sItem="sItem" :img="imgObj"></make-order>
                 </md-step>
             </md-steppers>
+            <md-dialog :md-active.sync="showDialog">
+                <md-dialog-title>Zatwierdź swój projekt</md-dialog-title>
+                <md-dialog-content>
+                        <img v-if="imgObj != null" :src="imgObj.src">
+                </md-dialog-content>
 
+                    <md-dialog-actions>
+                        <md-button class="md-primary" @click="showDialog = false">Nie chcę coś poprawić</md-button>
+                        <md-button class="md-primary" @click="confirmProject()">Tak to jest to!</md-button>
+                    </md-dialog-actions>
+
+
+            </md-dialog>
         </div>
     </div>
 </template>
@@ -132,6 +146,8 @@
     import VueKonva from 'vue-konva';
     import vue2Dropzone from '../../../node_modules/vue2-dropzone';
     import '../../../node_modules/vue2-dropzone/dist/vue2Dropzone.min.css';
+
+
     export default {
         props: ['project', 'files'],
         components:{
@@ -139,6 +155,7 @@
         },
         data() {
             return {
+                showDialog: false,
                 dropzoneOptions: {
                     url: base_url+'/upload',
                     thumbnailWidth: 300,
@@ -189,8 +206,10 @@
                 selectedObject: null,
                 clipData: null,
                 token: '',
+                imgObj: null,
             };
         },
+
         mounted() {
             this.configKonva.width = $('.konva-wrapper').width();
             this.configKonva.height = $('.konva-wrapper').width();
@@ -208,13 +227,43 @@
         },
 
         methods: {
+            back(){
+                console.log('fwafawfaw');
+                this.second = false;
+                this.active = 'second';
+            },
+            confirmProject(){
+                this.showDialog = false;
+                this.second = true;
+                this.active = 'third';
+            },
+            makePreview(){
+                if(this.configLayer.clipFunc == null) this.clipLayer();
+                let v =this;
+                setTimeout(function () {
+                    const stage = v.$refs.stage.getNode();
+                    v.selectedShapeName = '';
+                    v.selectedObject = null;
+                    v.$refs.transformer.getStage().detach();
+
+                    stage.toImage({pixelRatio:3,
+                        callback(img) {
+                            $(img).css('width', '100%');
+                            $('#image-placeholder').replaceWith(img);
+                            v.imgObj = img;
+
+                        }
+                    });
+
+                    v.showDialog = true;
+                },10);
+            },
             thumbnail(file, dataUrl){
               th(file, dataUrl);
             },
             fileAdded(file){
                 let v = this;
                 file.previewElement.addEventListener("click", function() {
-                    console.log(file);
                     v.addImage(JSON.parse(file.xhr.response).image);
                 });
             },
@@ -312,7 +361,6 @@
                 const selectedNode = stage.findOne('.' + selectedShapeName);
                 if(typeof selectedNode != 'undefined'){
                         this.design = selectedNode.attrs;
-                        console.log(this.design);
                 }
 
             },
@@ -323,13 +371,12 @@
                     }
                     var v = this;
                     this.configLayer.clipFunc =  function(ctx){
+                        var ratio = v.configKonva.width / v.clipData.konvaWidth;
                         if(v.clipData.type == 'circle'){
-                            ctx = drawEllipseByCenter(ctx, v.clipData.x, v.clipData.y, v.clipData.width, v.clipData.height);
+                            ctx = drawEllipseByCenter(ctx, v.clipData.x*ratio, v.clipData.y*ratio, v.clipData.width*ratio, v.clipData.height*ratio);
                         }else{
-                            ctx = roundRect(ctx,v.clipData.x, v.clipData.y, v.clipData.width, v.clipData.height, parseInt(v.clipData.cornerRadius));
+                            ctx = roundRect(ctx,v.clipData.x*ratio, v.clipData.y*ratio, v.clipData.width*ratio, v.clipData.height*ratio, parseInt(v.clipData.cornerRadius)*ratio);
                         }
-                        ctx.strokeStyle = "#8edbff";
-                        ctx.stroke();
                     }
             },
 
@@ -343,6 +390,22 @@
                 var img = new Image();
                 img.src = this.design.src;
                 img.onload = function () {
+                    if(v.clipData.type == 'circle'){
+
+                    }
+                    if(this.width >= this.height){
+                        v.design.width = v.configKonva.width / 2;
+                        v.design.x = (v.configKonva.width - v.design.width) / 2;
+                        var ratio = this.width / v.design.width;
+                        v.design.height = this.height / ratio;
+                        v.design.y = (v.configKonva.height - v.design.height) / 2;
+                    }else{
+                        v.design.height = v.configKonva.height / 2;
+                        v.design.y = (v.configKonva.height - v.design.height) / 2;
+                        var ratio = this.height / v.design.height;
+                        v.design.width = this.width / ratio;
+                        v.design.x = (v.configKonva.width - v.design.width) / 2;
+                    }
                     v.design.image = img;
                 };
 
@@ -351,8 +414,6 @@
                 this.design = {
                     x: 0,
                     y: 0,
-                    width: 200,
-                    height: 200,
                     name: 'design',
                     src: src,
                     draggable: true,
@@ -380,7 +441,6 @@
             },
             removeImage(image){
                 this.loading = true;
-                console.log(image);
                 if(image == this.design.src) {
                     this.design = {
                         x: 0,

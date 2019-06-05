@@ -19,6 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="@yield('page-description')">
     <meta name="google-site-verification" content="ww9g9RHRQpHGbZUYaWbbEMIDLsiV5EBlZtwKdSPp4n4" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('page-title')</title>
 
     <!-- Fonts -->

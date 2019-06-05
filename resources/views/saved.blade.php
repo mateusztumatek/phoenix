@@ -1,3 +1,4 @@
+{{--
 @if(\Illuminate\Support\Facades\Session::has('saved'))
     @if(count(\Illuminate\Support\Facades\Session::get('saved')) != 0)
     <li class="nav-item active" id="saved">
@@ -28,3 +29,4 @@
     </li>
         @endif
 @endif
+--}}

@@ -95,6 +95,7 @@ class Product extends Model
        } else {
            $this->profit_price = $this->price + setting('admin.profit');
        }
+         ($this->price > $this->prices_sellout && $this->prices_sellout != null && $this->prices_sellout != '')? $this->price = $this->prices_sellout : null;
      }
     public function scopeFilter($q)
     {
