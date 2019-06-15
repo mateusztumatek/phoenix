@@ -1,12 +1,18 @@
 @extends ('layouts.app')
 
 @section('content')
-    <div class="row" id="content">
+    <div class="container">
+        <div class="give-me-space">
+            <products :allproducts="{{$products}}" :input="{{json_encode(\Illuminate\Support\Facades\Input::all())}}" :tags="{{$tags}}"></products>
+        </div>
+    </div>
+    {{--<div class="row w-100" id="content">
+
         @include('products.filters_panel')
 
         @include('products.product_grid')
 
-    </div>
+    </div>--}}
 
     @endsection
 @section('page-title')

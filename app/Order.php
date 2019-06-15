@@ -14,5 +14,5 @@ $table->string('payment_state')->nullable();
 $table->dateTime('payment_create_time')->nullable();
 $table->dateTime('payment_update_time')->nullable();*/
 
-    protected $fillable = ['user_id', 'name','is_paid', 'street', 'street_number', 'flat_number', 'city', 'email', 'comments', 'images', 'price', 'postal_code', 'hash'];
+    protected $fillable = ['user_id', 'name','is_paid', 'street', 'street_number', 'flat_number', 'city', 'email', 'delivery', 'comments', 'images', 'price', 'postal_code', 'hash', 'cart'];
 }

@@ -10,6 +10,7 @@
         <div class="mt-2 photos">
 
             @foreach($gallery as $key => $g)
+
                 <div class="photo mt-2">
                     <img id="{{$key}}_image" src="{{url('/str/'.$g->image)}}">
                     <div class="content vertical-align" style="flex-wrap: wrap">
@@ -36,7 +37,7 @@
                                  @if($g->product_id)
 
                                 <div class="d-flex justify-content-center">
-                                    <a data-product_id = "{{$g->product()->id}}" data-slug = "{{\App\Services\Help::slugify($g->product()->name)}}" onclick ="quick_view(this, event)"  style="padding: 25px 10px !important; text-align: center !important;" class="my-button-border w-100" href="#">zobacz produkt</a>
+                                    <a  style="padding: 25px 10px !important; text-align: center !important;" class="my-button-border w-100 white-color" href="{{url('/produkt/'.$g->product_id.'/'.\App\Services\Help::slugify($g->product()->name))}}">zobacz produkt</a>
 
                                 </div>
                                 @endif

@@ -20,16 +20,16 @@ class CollectionController extends Controller
 
     }
     public function index(Request $request){
-        if($collections = Input::get('collections')){
+        /*if($collections = Input::get('collections')){
             $col = $collections;
             $col= Collection::where(function ($query) use ($collections){
                 foreach ($collections as $collection){
                     $query->orWhere('name', $collection);
                 }
             })->where('display_on_home', 0)->get();
-        }
+        }*/
         $tags = [];
-        if(isset($col)){
+      /*  if(isset($col)){
             $products = Product::join('collection_items', 'products.id', 'collection_items.product_id')->where('products.active', 1)->where(function ($query) use ($col){
                 foreach ($col as $collection){
                     $query->orWhere('collection_items.collection_id', $collection->id);
@@ -37,17 +37,22 @@ class CollectionController extends Controller
             })->select('products.*')->filter()->get();
         } else {
 
-            $products = Product::join('collection_items', 'products.id', 'collection_items.product_id')
-                ->where('products.active', 1)
-                ->join('collections', 'collection_items.collection_id', 'collections.id')
-                ->where('collections.name', '!=', 'Home')
-                ->where('collections.display_on_home', 0)
-                ->select('products.*')->filter()->get();
 
-        }
+        }*/
+        $products = Product::join('collection_items', 'products.id', 'collection_items.product_id')
+            ->where('products.active', 1)
+            ->join('collections', 'collection_items.collection_id', 'collections.id')
+            ->where('collections.name', '!=', 'Home')
+            ->where('collections.display_on_home', 0)
+            ->select('products.*')->get();
+
         $products = $products->unique('id');
+        foreach ($products as $pr){
+            $pr->init();
+            $pr->setAttribute('collections', $pr->getCollections());
+        }
 
-        if (request('materials')){
+      /*  if (request('materials')){
             foreach ($products as $key => $product) {
                 $check = true;
                 foreach (request('materials') as $material){
@@ -58,23 +63,22 @@ class CollectionController extends Controller
                 }
                 if(!$check) unset($products[$key]);
             }
-        }
-        foreach ($products as $product){
+        }*/
+        /*foreach ($products as $product){
             $product->init();
-        }
-        $count = count($products);
+        }*/
+        /*$count = count($products);*/
 
-        $array = [];
+       /* $array = [];
         foreach ($products as $product) {
             array_push($array, $product);
         }
-        $products = new LengthAwarePaginator(array_slice($array, $this->offset, $this->per_page, true), count($products), $this->per_page, $this->page, ['path' => $request->url(), 'query' => $request->query()]);
+        $products = new LengthAwarePaginator(array_slice($array, $this->offset, $this->per_page, true), count($products), $this->per_page, $this->page, ['path' => $request->url(), 'query' => $request->query()]);*/
         $collections = Collection::where('name', '!=', 'home')->where('display_on_home', 0)->where('name', '!=', 'navbar')->get();
-
         if($request->ajax()){
             return view('products.product_grid', compact('products'))->render();
         }
 
-        return view('collections.index', compact('collections', 'products', 'count', 'tags'));
+        return view('collections.index', compact('collections', 'products'));
     }
 }

@@ -12,13 +12,45 @@ $white-color: #d6d6d6;
 
 @import "../../node_modules/vue-material/dist/theme/engine"; // Import the theme engine
 
-@include md-register-theme("default-dark", (
+@include md-register-theme("default", (
         primary: $primary-color, // The primary color of your application
         accent: $white-color,
-        transparent: $secondary-color
+        default-accent: $white-color,
+        transparent: $secondary-color,
+        background: $secondary-color,
+        background-variant: $secondary-color,
+        text-primary-on-background: $white-color,
+        primary-on-background: $primary-color,
 ));
 
 @import "../../node_modules/vue-material/dist/theme/all"; // Apply the theme
+$themeColor: $primary-color;
+$disabledOpacity: 0.5 !default;
+
+$bgColor: #ccc !default;
+$railBorderRadius: 15px !default;
+
+$dotShadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32) !default;
+$dotShadowFocus: 0px 0px 1px 2px rgba($themeColor, 0.36) !default;
+$dotBgColor: #fff !default;
+$dotBgColorDisable: #ccc !default;
+$dotBorderRadius: 50% !default;
+
+$tooltipBgColor: $themeColor !default;
+$tooltipColor: #fff !default;
+$tooltipBorderRadius: 5px !default;
+$tooltipPadding: 2px 5px !default;
+$tooltipMinWidth: 20px !default;
+$tooltipArrow: 10px !default;
+$tooltipFontSize: 14px !default;
+
+$stepBorderRadius: 50% !default;
+$stepBgColor: rgba(0, 0, 0, 0.16) !default;
+
+$labelFontSize: 14px !default;
+
+/* import theme style */
+@import '../../node_modules/vue-slider-component/lib/theme/material.scss';
 .md-selected{
   color: $white-color !important;
 }

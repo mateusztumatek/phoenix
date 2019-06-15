@@ -1,6 +1,6 @@
 <template>
-    <div class="col-md-12 d-flex justify-content-center give-me-space">
-        <radial-progress-bar :diameter="600"
+    <div class="col-md-12 d-flex justify-content-center give-me-space" style="padding-top: 10px">
+        <radial-progress-bar :diameter="400"
                              :completed-steps="step"
                              :total-steps="5"
                              :strokeWidth="20"

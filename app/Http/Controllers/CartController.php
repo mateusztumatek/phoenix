@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Design;
 use App\Mark;
 use App\Product;
 use Illuminate\Http\Request;
@@ -27,11 +28,8 @@ class CartController extends Controller
             $product->init();
             $cart->addItem($product, $request->quantity, $request->length, 'product');
         }elseif($request->type == 'design'){
-            if($request->product_id != null){
-                $product = Product::find($request->product_id);
-                $product->init();
-            } else $product = null;
-            $cart->addDesign($product, $request->length, $request->quantity);
+            $design = Design::where('id', $request->design['id'])->first();
+            $cart->addDesign($design, 1, 'design');
         }
 
         return response()->json($cart);

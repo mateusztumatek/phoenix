@@ -246,7 +246,7 @@
                     v.selectedObject = null;
                     v.$refs.transformer.getStage().detach();
 
-                    stage.toImage({pixelRatio:3,
+                    stage.toImage({pixelRatio:2,
                         callback(img) {
                             $(img).css('width', '100%');
                             $('#image-placeholder').replaceWith(img);

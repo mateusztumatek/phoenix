@@ -13,21 +13,19 @@ use App\Page;
 class ProductController extends Controller
 {
     public function index($id, $slug){
-        $page = Page::where('home', 1)->first();
-        $products = Product::take(8)->get();
-        foreach ($products as $product){
-            $product->init();
-        }
-        $prod = Product::where('id', $id)->first();
-        if(!Cache::has('gallery')){
-            $gallery = Gallery::all();
-            Cache::put('gallery', $gallery, 1200);
-        }else{
-            $gallery = \Illuminate\Support\Facades\Cache::get('gallery');
+        $product = Product::where('id', $id)->first();
+        $product->init();
+        $cat = DB::table('product_categories')->inRandomOrder()->where('product_id', $product->id)->first();
+
+        $matched = DB::table('product_categories')->where('product_id', '!=', $product->id)->where('category_id', $cat->category_id)->take(10)->get();
+        $featured_products = collect();
+        foreach ($matched as $match){
+            $prod = Product::find($match->product_id);
+            $prod->init();
+            $featured_products->push($prod);
         }
 
-        $prod->init();
-       return view('new_home', compact('products','prod', 'gallery', 'page'));
+       return view('products.index', compact('product', 'featured_products'));
     }
     public function show($id, $slug){
         $prod = Product::where('id', $id)->first();
@@ -47,5 +45,8 @@ class ProductController extends Controller
 
         $colours = $product->getProductColours();
         return view('Cart.colours_modal', compact('product', 'colours', 'key'));
+    }
+    public function materials(){
+        return response()->json(DB::table('materials')->get());
     }
 }

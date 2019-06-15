@@ -56,6 +56,9 @@
 
 </head>
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v3.3"></script>
+
 <div id="app">
 
 <div class="site-loader">
@@ -87,10 +90,9 @@
 
         </div>
     </div>--}}
-    <div class="container">
-        <div class="row give-me-space" style="padding-top: 60px;">
 
-            <div class="col-sm-3">
+
+           {{-- <div class="col-sm-3">
                 <div class="sidebar">
                     @include('layouts.sidebar')
 
@@ -98,10 +100,9 @@
             </div>
             <div class="col-sm-9 pl-3 pr-3 left-border">
                     @yield('content')
-            </div>
+            </div>--}}
+            @yield('content')
 
-        </div>
-    </div>
 
     @include('layouts.footer')
 
@@ -135,7 +136,7 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<
+
 <script src="{{asset('js/app.js')}}"></script>
 
 <script src="{{asset('js/custom.js')}}"></script>

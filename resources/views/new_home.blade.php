@@ -47,7 +47,7 @@
 
                             @endphp
                             <p class="price">{{$price[0]}}.<span class="small">{{$price[1]}} zł</span></p>
-                            <a style="cursor: pointer" data-product_id = "{{$product->id}}" data-slug = "{{\App\Services\Help::slugify($product->name)}}" onclick ="quick_view(this, event)" class="my-button">Zobacz produkt</a>
+                            <a style="cursor: pointer" data-product_id = "{{$product->id}}" data-slug = "{{\App\Services\Help::slugify($product->name)}}" onclick ="quick_view(this, event)" class="my-button white-color">Zobacz produkt</a>
                         </div>
                     </div>
                     @endforeach
@@ -157,7 +157,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href="/galeria" class="btn my-button-border w-100 text-center mt-2"> Zobacz galerę zdjęć</a>
+            <a href="/galeria" class="btn my-button-border w-100 text-center mt-2 white-color"> Zobacz galerę zdjęć</a>
         </div>
         @endif
         <div class="page-content">

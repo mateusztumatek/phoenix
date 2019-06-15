@@ -78,18 +78,18 @@
         methods:{
             saveOrder(){
                 var formData = new FormData();
-
+                let v =this;
                 var blob = dataURItoBlob(this.img.src);
                 formData.append('file', blob);
 
                 formData.append('desc', this.desc);
                 formData.append('length', this.length);
                 formData.append('material', this.material);
-                formData.append('design', this.design);
-                formData.append('sItem', this.sItem);
+                formData.append('design', JSON.stringify(this.design));
+                formData.append('sItem',  JSON.stringify(this.sItem));
                 axios.post(base_url+'/designs', formData)
                     .then(function (response) {
-                        
+                        v.$root.addToCartDesign(response.data, 1);
                     })
             },
             validateOrder () {

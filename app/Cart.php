@@ -22,14 +22,14 @@ class Cart
             $this->itemsCount = $this->itemsCount + $quantity;
              array_push($this->items, $item);
     }
-    public function addDesign($design, $quantity, $length){
-        $item = [];
-        $item->design = $design;
+    public function addDesign($item, $quantity){
         $item->quantity = $quantity;
-        $item->length = $length;
+        $item->price = $item->getPrice();
         $item->type = 'design';
-        $this->totalPrice = $this->totalPrice + ($design->price * $quantity);
-        $this->itemsCount = $this->itemsCount * $quantity;
+        $this->totalPrice = $this->totalPrice + ($item->price * $quantity);
+        $this->itemsCount = $this->itemsCount + $quantity;
+        array_push($this->items, $item);
+
     }
     public function deleteItem($index){
         $item = $this->items[$index];

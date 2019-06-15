@@ -14,6 +14,10 @@ body {
   overflow-x: hidden;
 }
 
+.black-color {
+  color: #161616 !important;
+}
+
 .SlideInLeft {
   transform: translateX(-600px);
   opacity: 0;
@@ -181,6 +185,10 @@ body {
   outline: 1px solid black;
 }
 
+.md-radio-container {
+  border: 2px solid #d6d6d6 !important;
+}
+
 .my-button {
   transition: all 300ms;
   border-radius: 0px !important;
@@ -212,11 +220,12 @@ body {
   transition: all 200ms;
   padding: 10px 10px 10px 10px !important;
   background-color: transparent;
+  text-decoration: none;
   border: 1px solid white !important;
   color: white;
 }
 .my-button-border:hover {
-  color: #836e5d;
+  color: #836e5d !important;
   background-color: white;
 }
 

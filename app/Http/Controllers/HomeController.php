@@ -37,7 +37,7 @@ class HomeController extends Controller
         $tags = $tags->unique('tag');
 
         $products = Product::where('active', 1)->orderBy('created_at', 'desc')->filter()->get();
-        if (request('materials')){
+       /* if (request('materials')){
             foreach ($products as $key => $product) {
                 $check = false;
                 foreach (request('materials') as $material){
@@ -47,29 +47,28 @@ class HomeController extends Controller
                 }
                 if(!$check) unset($products[$key]);
             }
-        }
+        }*/
         foreach ($products as $product){
             $product->init();
         }
 
-        foreach ($products as $product) {
+        /*foreach ($products as $product) {
             array_push($array, $product);
         }
         $count = count($products);
 
-        $products = new LengthAwarePaginator(array_slice($array, $this->offset, $this->per_page, true), count($products), $this->per_page, $this->page, ['path' => $request->url(), 'query' => $request->query()]);
+        $products = new LengthAwarePaginator(array_slice($array, $this->offset, $this->per_page, true), count($products), $this->per_page, $this->page, ['path' => $request->url(), 'query' => $request->query()]);*/
 
         if($request->ajax()){
             return view('products.product_grid', compact('products'))->render();
         }
 
 
-        return view('home', compact('products', 'tags', 'count'));
+        return view('home', compact('products', 'tags'));
 
     }
 
     public function showCategory(Request $request, $category, $sub_category = null){
-
         if($sub_category){
             $category = Category::where('search', $sub_category)->first();
         } else {
@@ -78,7 +77,7 @@ class HomeController extends Controller
         $tags = DB::table('product_tags')->join('product_categories', 'product_tags.product_id', 'product_categories.product_id')->where('category_id', $category->id)->select('product_tags.*')->limit(20)->get();
         $tags = $tags->unique('tag');
         $products = Product::join('product_categories', 'products.id', 'product_categories.product_id')->where('category_id', $category->id)->where('products.active', 1)->select('products.*')->filter()->get();
-        if (request('materials')){
+        /*if (request('materials')){
             foreach ($products as $key => $product) {
                 $check = true;
                 foreach (request('materials') as $material){
@@ -89,23 +88,23 @@ class HomeController extends Controller
                 }
                 if(!$check) unset($products[$key]);
             }
-        }
+        }*/
         foreach ($products as $product){
             $product->init();
         }
-        $count = count($products);
+/*        $count = count($products);*/
 
         $array = [];
-        foreach ($products as $product) {
+       /* foreach ($products as $product) {
             array_push($array, $product);
         }
-        $products = new LengthAwarePaginator(array_slice($array, $this->offset, $this->per_page, true), count($products), $this->per_page, $this->page, ['path' => $request->url(), 'query' => $request->query()]);
+        $products = new LengthAwarePaginator(array_slice($array, $this->offset, $this->per_page, true), count($products), $this->per_page, $this->page, ['path' => $request->url(), 'query' => $request->query()]);*/
 
         if($request->ajax()){
             return view('products.product_grid', compact('products'))->render();
         }
 
-        return view('home', compact('products', 'category', 'tags', 'count'));
+        return view('home', compact('products', 'category', 'tags'));
     }
 
 

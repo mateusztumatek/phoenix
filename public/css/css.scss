@@ -21,6 +21,10 @@ body{
 
 
 }
+
+.black-color{
+ color: $secondary-color !important;
+}
 .SlideInLeft{
   transform: translateX(-600px);
   opacity: 0;
@@ -186,7 +190,9 @@ body{
   background-color: #084951;
   outline: 1px solid black;
 }
-
+.md-radio-container{
+  border: 2px solid $white-color !important;
+}
 .my-button{
   transition: all 300ms;
   border-radius: 0px !important;
@@ -217,14 +223,16 @@ body{
   }
 
 }
+
 .my-button-border{
   transition: all 200ms;
   padding: 10px 10px 10px 10px !important;
   background-color: transparent;
+  text-decoration: none;
   border: 1px solid white !important;
   color: white;
   &:hover{
-    color: $primary-color;
+    color: $primary-color !important;
     background-color:white;
   }
 }

@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->integer('street_number');
             $table->integer('flat_number')->nullable();
             $table->string('city');
-            $table->string('postal-code');
+            $table->string('postal_code');
             $table->string('email')->nullable();
             $table->text('comments')->nullable();
             $table->text('images')->nullable();

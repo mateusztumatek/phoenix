@@ -20,7 +20,7 @@
                         </div>
 
                         @if($carousel_item->url)
-                            <a class="btn my-button fadeInUp animated delay-1s" href="{{url('').$carousel_item->url}}">Zobacz więcej</a>
+                            <a class="btn my-button fadeInUp animated delay-1s white-color" href="{{url('').$carousel_item->url}}">Zobacz więcej</a>
                         @endif
 
                     </div>

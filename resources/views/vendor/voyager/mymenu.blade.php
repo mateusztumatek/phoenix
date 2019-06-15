@@ -63,7 +63,7 @@
                     <div class="m-auto dropdown-content row ">
                         <div class="col-md-8 row align-content-center">
                             <div class="col-sm-4" >
-                                <li onclick="window.location.href = $(this).children()[0].href"><a href="{{url('/produkty')}}">Wszystkie produkty</a></li>
+                                <li onclick="window.location.href = $(this).children()[0].href"><a class="black-color" href="{{url('/produkty')}}">Wszystkie produkty</a></li>
 
                             </div>
                             @php
@@ -71,13 +71,12 @@
                             @endphp
                             @foreach($categories as $category)
                                 <div class="col-sm-4 col-xs-12">
-                                    <li onclick="window.location.href = $(this).children()[0].href"><a href="{{route('category', ['category' => $category->search])}}">{{$category->name}}</a></li>
-
+                                    <li onclick="window.location.href = $(this).children()[0].href"><a class="black-color" href="{{route('category', ['category' => $category->search])}}">{{$category->name}}</a></li>
                                 </div>
 
                             @endforeach
                             <div class="col-sm-4 col-xs-12">
-                                <li onclick="window.location.href = $(this).children()[0].href"><a href="{{url('/kolekcje')}}">Biżuteria FANBAZOWA</a></li>
+                                <li onclick="window.location.href = $(this).children()[0].href"><a href="{{url('/kolekcje')}}" class="black-color">Biżuteria FANBAZOWA</a></li>
 
                             </div>
                         </div>
@@ -113,9 +112,7 @@
 
             </li>
         @endforeach
-        <li class="nav-item d-flex align-items-center">
-                <i onclick="$('#search_modal').modal()" class="fas fa-search white-color" aria-hidden="true"></i>
-        </li>
+
         <li class="nav-item d-flex align-items-center position-relative">
             <md-badge  :md-content="cart.itemsCount">
                 <md-button @click="show()" class="md-icon-button position-relative" style="overflow: visible">

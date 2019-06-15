@@ -10,7 +10,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
-import 'vue-material/dist/theme/default-dark.css' // This line here
+import 'vue-material/dist/theme/default.css' // This line here
 Vue.use(VueMaterial);
 /**
  * The following block of code may be used to automatically register your
@@ -32,6 +32,14 @@ Vue.component('createItem', require('./components/CreatorItems.vue').default);
 Vue.component('items', require('./components/Items.vue').default);
 Vue.component('make-order', require('./components/MakeOrder').default);
 Vue.component('cart', require('./components/CartComponent').default);
+Vue.component('Products', require('./components/Products/Products').default);
+Vue.component('Product', require('./components/SingleProduct').default);
+import VueRouter from 'vue-router';
+var router = new VueRouter({
+    mode: 'history',
+    routes: []
+});
+Vue.use(VueRouter);
 Vue.filter('toCurrency', function (value) {
     if (typeof value !== "number") {
         return value;
@@ -50,6 +58,7 @@ Vue.filter('toCurrency', function (value) {
  */
 
 const app = new Vue({
+    router,
     el: '#app',
     data:function () {
         return{
@@ -60,10 +69,11 @@ const app = new Vue({
             token: '',
             showCart: false,
             cart: [],
-
+            base_url: '',
         }
     },
     mounted(){
+        this.base_url = base_url;
       this.token = document.head.querySelector('meta[name="csrf-token"]').content;
       this.getCart();
     },
@@ -76,7 +86,9 @@ const app = new Vue({
         }
     },
     methods:{
-
+        getImage(src){
+            return base_url+'/storage/'+src;
+        },
       show(){
 
           this.showCart = !this.showCart;
@@ -96,20 +108,23 @@ const app = new Vue({
                   window.location.href = base_url+'/admin/projektuj';
               })
       },
+        getProductUrl(product){
+          return base_url+'/produkt/'+product.id+'/'+product.name;
+        },
         getCart(){
             let v =this;
-            axios.get('cart')
+            axios.get(base_url+'/cart')
                 .then(function (response) {
                     v.cart = response.data;
                     v.items = v.cart.itemsCount;
                 })
         },
-        addToCart(product){
+        addToCart(product ,length = null, quantity = 1){
           let v = this;
           axios.post(base_url+'/cart', {
               product_id: product.id,
-              quantity: 1,
-              length: '',
+              quantity: quantity,
+              length: length,
               type: 'product'
             })
               .then(function (response) {
@@ -120,6 +135,22 @@ const app = new Vue({
                       v.cartMessage = 'Ten przedmiot juz jest w koszyku';
                   }
               })
+        },
+        addToCartDesign(design, quantity = 1){
+            let v = this;
+            axios.post(base_url+'/cart', {
+                design: design,
+                quantity: quantity,
+                type: 'design'
+            })
+                .then(function (response) {
+                    if(response.data){
+                        v.cart = response.data;
+                        v.cartMessage = 'Dodano przedmiot pomyślnie';
+                    }else{
+                        v.cartMessage = 'Ten przedmiot juz jest w koszyku';
+                    }
+                })
         }
     }
 });

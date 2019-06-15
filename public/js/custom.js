@@ -33,6 +33,22 @@ function roundRect(ctx, x, y, width, height, radius) {
 
 $(document).ready(function () {
     // Add slideDown animation to Bootstrap dropdown when expanding.
+  /*  $('.star-label').on('hover', function () {
+        $(parent).children().each(function (data, object) {
+            $(object).removeClass('active');
+        })
+        var parent = $(this).parent();
+        var star = $(this).attr('data-star');
+        $(parent).children().each(function (data, object) {
+            if($(object).attr('data-star') <= star){
+                $(object).addClass('active');
+            }
+        })
+    }, function () {
+       $(this).parent().children().each(function (data, object) {
+           $(object).removeClass('active');
+       })
+    })*/
     $('#produkty-menu').hover(function() {
         $(this).dropdown('toggle')
     }, function() {
@@ -100,7 +116,28 @@ $(document).ready(function () {
             }
         ]
     });
-
+    $('#featured_slider').slick({
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1180,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
     $('#gallery_slider').slick({
 
         slidesToShow: 4,
@@ -341,11 +378,9 @@ var setPriceInCart = function () {
 };
 function quick_view(link, e) {
     e.preventDefault();
-    $.get( base_url+'/quick_view/'+$(link).attr("data-product_id")+'/'+$(link).attr('data-slug'), function( data ) {
+    $.get(link, function( data ) {
         $('#product_view').replaceWith(data);
         $('#product_view').modal();
-
-
     });
 }
 
@@ -604,7 +639,12 @@ function is_dark_color(c) {
 function change_image(elem) {
     $(elem).parent().next().show();
 }
-
+function share() {
+    FB.ui({
+        method: 'share',
+        href: 'http://www.myweb.com/topic/hello_world',
+    }, function(response){});
+}
 function removeParams(sParam)
 {
     var url = window.location.href.split('?')[0]+'?';

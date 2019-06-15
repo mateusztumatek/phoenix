@@ -26,6 +26,7 @@ $white-color: #d6d6d6;
 }
 
 .product-grid4{
+
   border-radius: 0px;
   position: relative;
   .product-labels{
@@ -563,7 +564,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 }
 
 .white-color{
-  color: $white-color;
+  color: $white-color !important;
 }
 
 .populary-product-slider{
@@ -581,8 +582,11 @@ h1 { font-size: 1.5em; margin: 10px; }
   border: 1px solid rgba(255,255,255,0.1);
   padding: 3px;
   margin-bottom: 10px;
-
-
+}
+.md-theme-default{
+  a{
+    color: $white-color;
+  }
 }
 form{
   textarea, input{

@@ -27,13 +27,15 @@ Route::group(['middleware' => 'Cart'], function(){
     Route::post('/add_mark/{item}', 'MarkController@store')->name('add_mark');
     Route::post('/delete_mark/{item}', 'MarkController@delete')->name('delete_mark');
     Route::get('/checkout/pay', 'OrderController@getPaymentStatus')->name('status');
-    Route::get('/get_colours/{product}', 'ProductController@getColours');
-    Route::get('/get_colours/{product}', 'ProductController@getColours');
     Route::post('/store/order', 'OrderController@store')->name('store.order');
+    Route::post('/make_order', 'OrderController@make_order');
+
     Route::get('/succes/{order}', 'OrderController@succes')->name('succes');
 
     Route::get('/quick_view/{id}/{slug}', 'ProductController@show')->name('show.product');
     Route::get('/produkt/{id}/{product}', 'ProductController@index')->name('index.product');
+    Route::get('/materials', 'ProductController@materials');
+
     Route::get('/marks_modal/{item}', 'MarkController@index');
     Route::post('/upload', 'DrawController@uploadImage');
     Route::post('/remove', 'DrawController@removeImage');
@@ -44,6 +46,8 @@ Route::group(['middleware' => 'Cart'], function(){
     Route::get('/produkty', 'HomeController@index')->name('items');
     Route::get('/search', 'HomeController@search')->name('search');
     Route::post('/add_comment/{product}', 'RatesController@store')->name('add.comment');
+    Route::get('/product/{product}/rates', 'RatesController@productRates');
+
     Route::get('/galeria', 'HomeController@gallery');
     Route::post('/add_to_saved', 'HomeController@add_to_favourite')->name('add_to_favourite');
     Route::post('/remove_favourite', 'HomeController@remove_favourites')->name('remove_favourite');

@@ -55,28 +55,31 @@ class Product extends Model
          }
          return $array;
      }
-
+     public function getCollections(){
+       return Collection::join('collection_items', 'collections.id', 'collection_items.collection_id')->where('product_id', $this->id)->select('collections.*')->get();
+     }
      public function getProductColours(){
          return DB::table('product_colours')->where('product_CodeShort', $this->CodeShort)->get();
+     }
+     public function getTags(){
+       return DB::table('product_tags')->where('product_id', $this->id)->get();
      }
      public function getMaterials(){
          return DB::table('product_materials')->where('product_id', $this->id)->get();
      }
-
-     public function getMarks(){
-
-         return DB::table('product_markgroups')->where('product_id', $this->macma_id)->join('marks', 'product_markgroups.name', 'marks.name')->select('marks.*')->get();
-
-     }
      public function getStock(){
          return DB::table('stock_availability')->where('product_codeShort', $this->codeShort)->first();
      }
-     public function hasProject(){
-       return($this->mark_price > 0) ? true : false;
-     }
 
-     public function getRates(){
-        return Rate::where('product_id', $this->macma_id)->get();
+     public function getRate(){
+       $rates= Rate::where('product_id', $this->id)->get();
+       if(count($rates) == 0) return 5;
+       $temp = 0;
+       foreach ($rates as $rate){
+          $temp = $temp + $rate->rate;
+       }
+       $rate = $temp / count($rates);
+        return $rate;
      }
 
      public function deleteProductProject($item){
@@ -87,7 +90,9 @@ class Product extends Model
          Storage::deleteDirectory('projects/'.$folder_path);
      }
      public function init(){
-
+       $this->setAttribute('materials', $this->getMaterials());
+       $this->setAttribute('tags', $this->getTags());
+       $this->setAttribute('link', $this->id.'/'.Help::slugify($this->name));
        if($this->profit != NULL){
            if($this->profit > 0){
                $this->profit_price = $this->price + $this->profit;

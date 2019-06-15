@@ -12,6 +12,7 @@
         "serve": "node --max-old-space-size=3072 ./serve.js"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.9.0",
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
@@ -26,13 +27,18 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "aos": "^3.0.0-beta.6",
         "jquery-zoom": "^1.7.21",
         "konva": "^3.2.6",
         "laravel-echo": "^1.5.3",
         "pusher-js": "^4.4.0",
+        "v-viewer": "^1.4.1",
+        "vue-infinite-loading": "^2.4.4",
         "vue-konva": "^2.0.6",
         "vue-material": "^1.0.0-beta-11",
         "vue-radial-progress": "^0.2.10",
+        "vue-router": "^3.0.6",
+        "vue-slider-component": "^3.0.32",
         "vue2-dropzone": "^3.5.9",
         "vuelidate": "^0.7.4"
     }
