@@ -78,7 +78,7 @@
                     @foreach($cart->items as $item)
                     <div class="col-md-3 col-6 p-3">
                         <div class="position-relative w-100">
-                            <a @if($item->type=='prdouct') href="{{url('/produkt/'.$item->id.'/'.\App\Services\Help::slugify($item->name))}}" @else href="{{url('/designs/'.$item->id)}}" @endif><img class="w-100" @if($item->type == 'product') src="{{url('/storage/'.json_decode($item->images)[0])}}" @else src="{{url('/storage/'.$item->previewImage)}}" @endif></a>
+                            <a @if($item->type=='prdouct') href="{{url('/produkt/'.$item->id.'/'.\App\Services\Help::slugify($item->name))}}" @else href="{{url('/designs/'.$item->id)}}" @endif><img class="w-100" @if($item->type == 'product') src="{{url('/str/'.json_decode($item->images)[0])}}" @else src="{{url('/str/'.$item->previewImage)}}" @endif></a>
                             <div class="position-absolute w-100 d-flex justify-content-end align-content-end" style="bottom: 0px">
                                 <div class="py-2 px-3 white-background" style="color: black; font-weight: bold">{{$item->quantity}}</div>
                             </div>

@@ -46,12 +46,11 @@ class CollectionController extends Controller
             ->where('collections.display_on_home', 0)
             ->select('products.*')->get();
 
-        $products = $products->unique('id');
+
         foreach ($products as $pr){
             $pr->init();
             $pr->setAttribute('collections', $pr->getCollections());
         }
-
       /*  if (request('materials')){
             foreach ($products as $key => $product) {
                 $check = true;
@@ -78,7 +77,6 @@ class CollectionController extends Controller
         if($request->ajax()){
             return view('products.product_grid', compact('products'))->render();
         }
-
         return view('collections.index', compact('collections', 'products'));
     }
 }

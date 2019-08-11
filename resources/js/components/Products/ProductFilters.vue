@@ -13,6 +13,11 @@
                         <span :key="'tag'+item.id" @click="deleteFilter(item, 'selectedTags')" class="badge badge-pill badge-primary">{{item.tag}}</span>
                     </transition-group>
                 </span>
+                <span>
+                    <transition name="fade">
+                        <span v-if="sales" @click="sales = false" class="badge badge-pill badge-primary">Wyprzedaże</span>
+                    </transition>
+                </span>
                 <span v-for="(item) in selectedFilters.selectedCollections">
                     <transition-group name="fade">
                         <span :key="'collection'+item.id" @click="deleteFilter(item, 'selectedCollections')" class="badge badge-pill badge-primary">{{item}}</span>
@@ -26,7 +31,7 @@
         </transition>
         <p class="sortHeader" data-toggle="collapse" data-target="#price_collapse">Cena: </p>
         <div class="collapse w-100 show" id="price_collapse">
-            <vue-slider v-on:change="setPrice()" v-model="selectedFilters.selectedPrice" :min="0" :max="200" :height='10' :dotSize="20" :enable-cross="false">
+            <vue-slider v-on:drag-end="changeFilters()" v-model="selectedFilters.selectedPrice" :min="0" :max="200" :height='10' :dotSize="20" :enable-cross="false">
                 <template #tooltip="{ index }">
                     <span v-if="index === 0" class="vue-slider-dot-tooltip-text">{{selectedFilters.selectedPrice[0]}} zł</span>
                     <span v-else class="vue-slider-dot-tooltip-text">{{selectedFilters.selectedPrice[1]}} zł</span>
@@ -39,10 +44,11 @@
                 <md-checkbox v-on:change="changeFilters()" class="w-100 mt-2 mb-0" v-for="collection in collections" v-model="selectedFilters.selectedCollections" :value="collection.name">{{collection.name}}</md-checkbox>
             </div>
         </div>
+        <md-checkbox v-on:change="changeFilters()" class="w-100 mb-0 mt-4"  v-model="sales">Wyprzedaże <strong>({{countFilters.sales}})</strong></md-checkbox>
 
         <p class="mt-4 sortHeader" data-toggle="collapse" data-target="#materials_collapse">Materiały: </p>
         <div class="collapse w-100 show" id="materials_collapse">
-         <md-checkbox v-on:change="changeFilters()" class="w-100 mt-2 mb-0" v-for="material in materials" v-model="selectedFilters.selectedMaterials" :value="material.name">{{material.name}}</md-checkbox>
+         <md-checkbox v-on:change="changeFilters()" class="w-100 mt-2 mb-0" v-for="(material, key) in materials" v-model="selectedFilters.selectedMaterials" :value="material.name">{{material.name}}<strong v-if="selectedFilters.selectedMaterials.length < 1">({{countFilters[key]}})</strong></md-checkbox>
         </div>
         <p class="mt-4 sortHeader" data-toggle="collapse" data-target="#sort_collapse">Sortuj według:</p>
         <div class="collapse show w-100" id="sort_collapse">
@@ -75,11 +81,12 @@
         components:{
             VueSlider: VueSlider
         },
-        props:['tags', 'inputs', 'collections'],
+        props:['tags', 'inputs', 'collections', 'productsForFilters'],
         data(){
             return{
                 priceSet: false,
                 materials: [],
+                sales: false,
                 selectedFilters: {
                     selectedCollections: [],
                     selectedMaterials: [],
@@ -88,6 +95,7 @@
                     selectedTags: [],
                     search: '',
                 },
+                countFilters:{},
             }
         },
 
@@ -125,6 +133,23 @@
                 }
             }
         },
+        watch:{
+            productsForFilters:  function(data){
+                let v =this;
+                var sales = 0;
+                for(var material in this.materials){
+                    v.countFilters[material] = 0;
+                }
+                for(var i in this.productsForFilters){
+                    var elem = v.productsForFilters[i];
+                    if(elem.prices_sellout != null) sales = sales +1;
+                    for(var material in this.materials){
+                        if(elem.materials.find(x => x.name == v.materials[material].name)) v.countFilters[material] = v.countFilters[material] + 1;
+                    }
+                }
+                this.countFilters.sales = sales;
+            }
+        },
         methods:{
             getSortName(){
               switch (this.selectedFilters.selectedSort) {
@@ -158,6 +183,7 @@
               if(this.priceSet) return true;
               if(this.selectedFilters.selectedTags.length > 0) return true;
               if(this.selectedFilters.selectedSort != null) return true;
+              if(this.sales) return true;
               if(this.selectedFilters.selectedCollections.length > 0) return true;
 
                 return false;
@@ -181,13 +207,16 @@
                 if(this.selectedFilters.selectedPrice && this.priceSet){
                     statemant = statemant+'price_from='+this.selectedFilters.selectedPrice[0]+'&price_to='+this.selectedFilters.selectedPrice[1]+'&';
                 }
+                if(this.sales){
+                    statemant = statemant+'sales=1&';
+                }
                 if(this.selectedFilters.selectedTags){
                     this.selectedFilters.selectedTags.forEach(function (data) {
                         statemant = statemant+'tags[]='+data.tag+'&';
                     })
                 }
                 history.replaceState(null, null, statemant);
-                this.$emit('change-filters', this.selectedFilters);
+                this.$emit('change-filters', this.selectedFilters, this.sales);
             },
             getMaterials(){
                 let v =this;

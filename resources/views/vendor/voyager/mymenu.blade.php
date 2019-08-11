@@ -113,7 +113,7 @@
             </li>
         @endforeach
 
-        <li class="nav-item d-flex align-items-center position-relative">
+       {{-- <li class="nav-item d-flex align-items-center position-relative">
             <md-badge  :md-content="cart.itemsCount">
                 <md-button @click="show()" class="md-icon-button position-relative" style="overflow: visible">
                     <i class="fas fa-shopping-cart"></i>
@@ -129,5 +129,5 @@
                             </div>
                     </div>
                 </div>
-        </li>
+        </li>--}}
         @include('saved')

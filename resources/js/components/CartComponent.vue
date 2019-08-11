@@ -249,7 +249,7 @@
                 this.$emit('my-event');
             },
             getImage(src){
-                return base_url+'/storage/'+src;
+                return base_url+'/str/'+src;
             },
             deleteItem(key){
                 let v =this;

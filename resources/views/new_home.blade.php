@@ -47,7 +47,7 @@
 
                             @endphp
                             <p class="price">{{$price[0]}}.<span class="small">{{$price[1]}} zł</span></p>
-                            <a style="cursor: pointer" data-product_id = "{{$product->id}}" data-slug = "{{\App\Services\Help::slugify($product->name)}}" onclick ="quick_view(this, event)" class="my-button white-color">Zobacz produkt</a>
+                            <a style="cursor: pointer" href="{{url('/produkt/'.$product->id.'/'.\App\Services\Help::slugify($product->name))}}" class="my-button white-color">Zobacz produkt</a>
                         </div>
                     </div>
                     @endforeach

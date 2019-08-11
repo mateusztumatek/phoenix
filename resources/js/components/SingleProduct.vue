@@ -7,9 +7,9 @@
                         <div class="sign" v-if="product.new == 1">
                             Nowość
                         </div>
-                        <div class="sign" v-if="product.quantity > 0 && product.quantity < 2">
+                      <!--  <div class="sign" v-if="product.quantity > 0 && product.quantity < 2">
                             Ostatnie sztuki
-                        </div>
+                        </div>-->
                         <div class="sign" v-if="product.quantity == 0">
                             Brak sztuk
                         </div>
@@ -27,7 +27,7 @@
                             <h1 class="font-weight-bold white-color">{{product.name}}</h1>
                         </div>
                         <div class="col-md-3 d-flex align-items-center">
-                            <div class="fb-share-button" data-href="https://raccmoon-craft.pl/produkty" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Udostępnij</a></div>
+                            <div class="fb-share-button" :data-href="$root.base_url+'/produkt/'+product.id+'/'+product.name" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Udostępnij</a></div>
                         </div>
                     </div>
                     <div class="col-md-12 mt-3">
@@ -40,13 +40,25 @@
                         <span style="opacity:0.5">Opis:</span>
                         <br>
                         <p style="letter-spacing: 1px; font-weight: 300">{{product.intro}}</p>
-                        <p v-if="product.weight" style="letter-spacing: 1px; font-weight: 300">Waga: <strong>{{product.weight}}g</strong></p>
+                        <p v-if="product.weight" style="letter-spacing: 1px; font-weight: 300">Waga: <strong>{{product.weight}}</strong></p>
                         <p v-if="product.size" style="letter-spacing: 1px; font-weight: 300">Rozmiar: <strong>{{product.size}}</strong></p>
                         <p v-if="product.color" style="letter-spacing: 1px; font-weight: 300">Kolor: <strong>{{product.color}}</strong></p>
 
 
                     </div>
-                    <div class="col-md-12 d-flex align-items-center flex-wrap">
+                    <div class="col-md-12">
+                        <p class="text-center white-color font-weight-bold">Zapytaj o ten produkt:</p>
+                        <md-field>
+                            <label>Zapytaj o ten produkt</label>
+                            <md-textarea v-model="message"></md-textarea>
+                        </md-field>
+                        <md-field>
+                            <label>Podaj swój adres e-mail, na niego wyślę odpowiedź</label>
+                            <md-input type="email" v-model="email"></md-input>
+                        </md-field>
+                        <md-button @click="sendMessage()" class="md-raised md-primary white-color m-0 mt-1 w-100">Wyślij zapytanie</md-button>
+                    </div>
+                   <!-- <div class="col-md-12 d-flex align-items-center flex-wrap">
                         <div class="col-md-4 d-flex align-items-center">
                             <span @click="quantity = quantity -1" class="control">-</span>
                             <input v-model="quantity" class="number-input" type="number" min="0" >
@@ -62,12 +74,12 @@
                         <div class="w-100 mt-3">
                             <md-button @click="addToCart()" class="md-raised md-primary m-0" style="border-radius: 20px; padding: 5px 15px;"><i class="fa fa-shopping-bag mr-2"></i>Dodaj do koszyka</md-button>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
-        <div class="container animated fadeIn" v-if="errors.length > 0">
-            <span class="alert alert-info w-100 my-3" v-for="error in errors">{{error}}</span>
+        <div class="container animated fadeIn flex-wrap" v-if="errors.length > 0">
+            <span class="alert alert-info w-100 my-3 d-block" v-for="error in errors">{{error}}</span>
         </div>
 
         <div class="section-white mt-5 position-relative">
@@ -75,7 +87,7 @@
                 <div class="d-flex">
                     <md-tabs @md-changed="changeTab" md-sync-route class="col-md-10" md-dynamic-height>
                         <md-tab id="opis" md-label="Opis" to="?tab=opis"exact>
-                            <p>{{product.content}}</p>
+                            <p v-html="product.content"></p>
                             <p class="mb-0">Materiały: <span v-for="material in product.materials">{{material.name}}, </span></p>
                         </md-tab>
                         <md-tab id="oceny" md-label="Oceny" to="?tab=oceny"exact>
@@ -90,14 +102,14 @@
                                     <i @click="setRate(4)" class="far fa-star star-label" :class="{'fa' : currentRate >= 4}" data-star="4"></i>
                                     <i @click="setRate(5)" class="far fa-star star-label" :class="{'fa' : currentRate >= 5}" data-star="5"></i>
                                 </div>
-                                <md-field class="mt-3">
+                               <!-- <md-field class="mt-3">
                                     <label>Twój komentarz</label>
                                     <md-textarea v-model="comment"></md-textarea>
-                                </md-field>
-                                <md-button @click="addComment()" class="md-raised md-primary m-0 white-color">Dodaj komentarz</md-button>
+                                </md-field>-->
+                                <md-button @click="addComment()" class="md-raised md-primary m-0 white-color my-3">Dodaj ocenę</md-button>
                             </div>
                             <span v-if="comment_done" class="animated fadeIn">Dodałeś swoją ocenę!</span>
-                            <div class="col-md-12 d-flex flex-wrap my-2" style="align-items: baseline" v-for="(comment, key) in comments_filtered">
+                            <div class="col-md-12 pl-0 d-flex flex-wrap my-2" style="align-items: baseline" v-for="(comment, key) in comments_filtered">
                                 <div class="position-relative">
                                     <div class="wrapper" v-if="comment.rate != null">
                                         <i class="far fa-star star-label" :class="{'fa' : comment.rate >= 1}" data-star="1"></i>
@@ -144,8 +156,6 @@
 <script>
     import 'viewerjs/dist/viewer.css'
     import Viewer from 'v-viewer'
-
-
     Vue.use(Viewer)
     export default {
         props:['product', 'featured'],
@@ -167,6 +177,9 @@
               errors: [],
               comment_done: false,
               show_all: false,
+              message: '',
+              email: '',
+              isMessageSend: false,
           }
         },
         mounted() {
@@ -218,6 +231,29 @@
             }
         },
         methods:{
+            sendMessage(){
+                let v =this;
+                var errors = false;
+                if(this.email == ''){
+                    this.errors.push('Musisz podać adres emial zwrotny.');
+                    errors = true;
+                }
+                if(this.message == ''){
+                    this.errors.push('Wpisz treść wiadomości.');
+                    errors = true;
+                }
+                if(!errors){
+                    axios.post(base_url+'/store/order', {
+                        email: this.email,
+                        text: this.message,
+                        product_id: this.product.id,
+                    }).then(function(response){
+                        v.isMessageSend = true;
+                        $('#thanks_modal').replaceWith(response.data);
+                        $('#thanks_modal').modal();
+                    })
+                }
+            },
             addToCart(){
                 this.$root.addToCart(this.product, this.length, this.quantity);
             },
@@ -228,7 +264,7 @@
                 this.activeTab = tab;
             },
             getSrc(src){
-                return base_url+'/storage/'+src;
+                return base_url+'/str/'+src;
             },
             addComment(){
                 let v =this;
@@ -259,6 +295,16 @@
        i{
            font-size: 1.3rem;
        }
+    }
+    .md-textarea{
+        -webkit-text-fill-color: $white-color !important;
+
+    }
+    .md-field.md-theme-default.md-has-textarea:not(.md-autogrow):after, {
+        border-color: $white-color !important;
+    }
+    .md-field.md-theme-default.md-has-textarea:not(.md-autogrow):before{
+        border-color: $primary-color !important;
     }
     .md-tabs{
         .md-field{

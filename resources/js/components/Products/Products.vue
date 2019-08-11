@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-md-3">
-            <filters v-on:change-filters="changeFilter" :tags="tags" :inputs="input" :collections="collections"></filters>
+            <filters v-on:change-filters="changeFilter" :tags="tags" :inputs="input" :collections="collections" :productsForFilters="productsForFilters"></filters>
         </div>
         <div class="col-md-9 d-flex flex-wrap position-relative">
 
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="product-content">
-                        <h2 class="title"><a href="#" class="white-color" style="cursor: pointer">{{product.name}}</a></h2>
+                        <h2 class="title"><a :href="$root.base_url+'/produkt/'+product.link" class="white-color" style="cursor: pointer">{{product.name}}</a></h2>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex">
                                 <div class="price" :class="{'line-through' : product.prices_sellout}">
@@ -37,9 +37,9 @@
                                 <md-button @click="quick_view('/quick_view/'+product.link)" class="md-icon-button  md-raised md-primary">
                                     <i  class="fas fa-eye"></i>
                                 </md-button>
-                                <md-button @click="$parent.addToCart(product)" class="md-icon-button  md-raised md-primary">
+                              <!--  <md-button @click="$parent.addToCart(product)" class="md-icon-button  md-raised md-primary">
                                     <i  class="fas fa-shopping-cart"></i>
-                                </md-button>
+                                </md-button>-->
                             </div>
                         </div>
                     </div>
@@ -75,6 +75,8 @@
                 per_page:12,
                 filteredProducts: [],
                 filters:{},
+                sales: false,
+                productsForFilters: [],
             }
         },
         computed:{
@@ -84,6 +86,9 @@
                     if(v.filters.search && v.filters.search != ''){
                         var term = v.filters.search.toLowerCase();
                         if(i.name.toLowerCase().indexOf(term) == -1 && i.content.toLowerCase().indexOf(term) == -1) return null;
+                    }
+                    if(v.sales){
+                        if(i.prices_sellout == null) return null;
                     }
                     if(v.filters.selectedPrice){
                         if((v.filters.selectedPrice[0] > i.price)) return null
@@ -133,7 +138,7 @@
                         return b.count - a.count;
                     })
                 }
-
+                this.productsForFilters = arr;
                 var copy = Object.assign([], arr);
                 var to_return = copy.splice(0 , this.per_page * this.page);
                 if(to_return.length == arr.length){
@@ -160,10 +165,11 @@
                     $('#product_view').modal();
                 });
             },
-            changeFilter(filters){
+            changeFilter(filters, sales){
                 this.done = false;
                 this.page = 1;
                 this.filters = filters;
+                this.sales = sales;
                 AOS.init();
 
             },

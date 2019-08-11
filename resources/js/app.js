@@ -87,7 +87,7 @@ const app = new Vue({
     },
     methods:{
         getImage(src){
-            return base_url+'/storage/'+src;
+            return base_url+'/str/'+src;
         },
       show(){
 

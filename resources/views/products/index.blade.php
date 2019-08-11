@@ -5,7 +5,8 @@
         <product :product="{{$product}}" :featured="{{json_encode($featured_products)}}"></product>
     @endsection
 
-@section('page-title') {{$product->name}} z nadrukiem - Firmowygadżet.pl
+@section('page-title') {{$product->name}}
 @endsection
 @section('page-description')
+    {{$product->intro}}
 @endsection

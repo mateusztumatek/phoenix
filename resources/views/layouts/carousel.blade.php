@@ -1,5 +1,5 @@
 @php
-    $carousel_items = \App\Po::where('type', 'appearance_carousel')->get();
+    $carousel_items = \App\Po::orderBy('created_at', 'desc')->where('type', 'appearance_carousel')->get();
 @endphp
 
 <div id="carousel" class="carousel slide" data-ride="carousel">

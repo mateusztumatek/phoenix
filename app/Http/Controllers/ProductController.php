@@ -14,6 +14,8 @@ class ProductController extends Controller
 {
     public function index($id, $slug){
         $product = Product::where('id', $id)->first();
+        $product->count = $product->count + 1;
+        $product->update();
         $product->init();
         $cat = DB::table('product_categories')->inRandomOrder()->where('product_id', $product->id)->first();
 

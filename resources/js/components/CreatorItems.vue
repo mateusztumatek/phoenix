@@ -421,7 +421,7 @@
                 formData.append('file',tmp_img);
                 formData.append('creator_item', true);
                 axios
-                    .post('http://127.0.0.1:8000/upload',formData, {
+                    .post(base_url+'/upload',formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }

@@ -76,7 +76,7 @@ class HomeController extends Controller
         }
         $tags = DB::table('product_tags')->join('product_categories', 'product_tags.product_id', 'product_categories.product_id')->where('category_id', $category->id)->select('product_tags.*')->limit(20)->get();
         $tags = $tags->unique('tag');
-        $products = Product::join('product_categories', 'products.id', 'product_categories.product_id')->where('category_id', $category->id)->where('products.active', 1)->select('products.*')->filter()->get();
+        $products = Product::join('product_categories', 'products.id', 'product_categories.product_id')->where('category_id', $category->id)->where('products.active', 1)->orderBy('created_at', 'desc')->select('products.*')->filter()->get();
         /*if (request('materials')){
             foreach ($products as $key => $product) {
                 $check = true;

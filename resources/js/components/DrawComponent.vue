@@ -246,7 +246,7 @@
                     v.selectedObject = null;
                     v.$refs.transformer.getStage().detach();
 
-                    stage.toImage({pixelRatio:2,
+                    stage.toImage({pixelRatio:1,
                         callback(img) {
                             $(img).css('width', '100%');
                             $('#image-placeholder').replaceWith(img);
@@ -429,7 +429,7 @@
                 let formData = new FormData();
                 formData.append('file',tmp_img);
                 axios
-                    .post('http://127.0.0.1:8000/upload',formData, {
+                    .post(base_url+'/upload',formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
@@ -456,7 +456,7 @@
 
                 }
                 axios
-                    .post('http://127.0.0.1:8000/remove',{'src': image}).then(response=>{
+                    .post(base_url+'/remove',{'src': image}).then(response=>{
                         this.upload_images.splice(this.upload_images.indexOf(image), 1);
                         this.loading = false;
                     });

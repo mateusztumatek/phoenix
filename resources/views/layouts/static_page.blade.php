@@ -43,7 +43,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('slick/slick-theme.css')}}"/>
     <link rel="stylesheet" href="{{ asset('css/topbar.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/gallery.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{asset('css/xzoom.css')}}" type="text/css">
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -151,7 +150,6 @@
 
 <script src="{{asset('js/modernizr.custom.js')}}"></script>
 <script type="text/javascript" src="{{asset('slick/slick.js')}}"></script>
-<script src='https://unpkg.com/xzoom/dist/xzoom.min.js'></script>
 <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 @yield('scripts_after')
