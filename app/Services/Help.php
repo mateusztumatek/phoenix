@@ -103,7 +103,13 @@ class Help
         if (empty($text)) {
             return 'n-a';
         }
-
         return $text;
+    }
+    public static function isMobile(){
+        if(\request()->ip == '77.252.61.221'){
+            return true;
+        }
+        $is_mobile = (new \Jenssegers\Agent\Agent())->isMobile();
+        return $is_mobile;
     }
 }

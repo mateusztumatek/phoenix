@@ -26,7 +26,6 @@ class ProductController extends Controller
             $prod->init();
             $featured_products->push($prod);
         }
-
        return view('products.index', compact('product', 'featured_products'));
     }
     public function show($id, $slug){

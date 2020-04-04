@@ -88,7 +88,7 @@
                                             $images = json_decode($service->image);
                                         @endphp
                            <span class="itemDot @if($key == 0) active @endif itemDot{{$key}}" data-tab="{{$key}}">
-                           <img src="{{url('/str/'.$images[0])}}">
+                           <img class="lazy" data-src="{{url('/str/'.$images[0])}}">
 
                            <span class="forActive"></span>
 
@@ -107,7 +107,7 @@
                                             $images = json_decode($service->image);
                                         @endphp
                                     <div class="CirItem title-box @if($key == 1) active @endif CirItem{{$key}}">
-                                        <img class="background-image" src="{{url('/str/'.$images[0])}}">
+                                        <img class="background-image lazy" data-src="{{url('/str/'.$images[0])}}">
                                         <h2 class="title text-left"><span>{{$service->name}}</span></h2>
 
                                         <div class="CirItemDescription">
@@ -132,24 +132,24 @@
 
                 @foreach($gallery as $item)
                     <div class="product-slide">
-                        <img class="gallery-image" src="{{url('/str/'.$item->image)}}">
+                        <img class="gallery-image lazy" data-src="{{url('/str/'.$item->image)}}">
                         <div class="content">
 
                             <h2 class="header">{{$item->name}}</h2>
                             <div class="d-flex justify-content-center">
                                 @if($item->facebook)
                                     <p class=" m-3 text-center" style="margin-bottom: 60px !important;">
-                                        <a href="{{$item->facebook}}" target="_BLANK"><img src="{{url('/default/fb-icon.png')}}" style="max-width: 40px" class="icon-social"></a>
+                                        <a href="{{$item->facebook}}" target="_BLANK"><img data-src="{{url('/default/fb-icon.png')}}" style="max-width: 40px" class="icon-social lazy"></a>
                                     </p>
                                 @endif
                                 @if($item->instagram)
                                     <p class=" m-3 text-center" style="margin-bottom: 60px !important;">
-                                        <a href="{{$item->instagram}}" target="_BLANK"><img src="{{url('/default/ig-icon.png')}}" style="max-width: 40px" class="icon-social"></a>
+                                        <a href="{{$item->instagram}}" target="_BLANK"><img data-src="{{url('/default/ig-icon.png')}}" style="max-width: 40px" class="icon-social lazy"></a>
                                     </p>
                                 @endif
                                 @if($item->site)
                                     <p class=" m-3 text-center" style="margin-bottom: 60px !important;">
-                                        <a href="{{$item->site}}" target="_BLANK"><img src="{{url('/default/site-icon.png')}}" style="max-width: 40px" class="icon-social"></a>
+                                        <a href="{{$item->site}}" target="_BLANK"><img data-src="{{url('/default/site-icon.png')}}" style="max-width: 40px" class="icon-social lazy"></a>
                                     </p>
                                 @endif
                             </div>

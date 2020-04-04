@@ -10,8 +10,14 @@
                       <!--  <div class="sign" v-if="product.quantity > 0 && product.quantity < 2">
                             Ostatnie sztuki
                         </div>-->
-                        <div class="sign" v-if="product.quantity == 0">
-                            Brak sztuk
+                        <div class="sign" v-if="product.availability == 0">
+                            Niedostępne
+                        </div>
+                        <div class="sign" v-if="product.availability == 1" style="font-size:0.6rem">
+                            Dostępne od ręki
+                        </div>
+                        <div class="sign" v-if="product.availability == 2" style="font-size: 0.6rem">
+                            Na zamówienie
                         </div>
                     </div>
                     <img class="w-100 hover-image" :src="getSrc(JSON.parse(product.images)[0])">
@@ -30,12 +36,19 @@
                             <div class="fb-share-button" :data-href="$root.base_url+'/produkt/'+product.id+'/'+product.name" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Udostępnij</a></div>
                         </div>
                     </div>
-                    <div class="col-md-12 mt-3">
+                    <div class="col-md-6 mt-3">
                         <span class="badge badge-pill badge-primary py-2 px-3 white-background" v-for="tag in product.tags">{{tag.tag}}</span>
                     </div>
-                    <div class="col-md-12 mt-3">
-                        <div style="font-size: 2.5rem; line-height: 2.5rem; font-weight: 200" class="white-color">{{product.price | toCurrency}}</div>
+                    <div class="d-flex flex-wrap">
+                        <div class="col-auto mt-3" v-if="product.prices_sellout">
+                            <div style="font-size: 2.5rem; line-height: 2.5rem; font-weight: 200" class="white-color">{{product.prices_sellout | toCurrency}}</div>
+                        </div>
+                        <div v-if="product.price"  class="col-auto mt-3">
+                            <div style="font-size: 2.5rem; line-height: 2.5rem; font-weight: 200" v-bind:class="{'line-through' : product.prices_sellout}" class="white-color">{{product.price | toCurrency}}</div>
+                        </div>
                     </div>
+
+
                     <div class="col-md-12 mt-3 white-color">
                         <span style="opacity:0.5">Opis:</span>
                         <br>

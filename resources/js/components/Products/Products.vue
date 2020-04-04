@@ -3,48 +3,51 @@
         <div class="col-md-3">
             <filters v-on:change-filters="changeFilter" :tags="tags" :inputs="input" :collections="collections" :productsForFilters="productsForFilters"></filters>
         </div>
-        <div class="col-md-9 d-flex flex-wrap position-relative">
-
-            <div class="col-md-4 col-sm-6"  v-for="product in products" v-if="products.length > 0">
-                <div class="product-grid4 border-muted animated fadeIn" :class="{'muted' : product.quantity == 0}">
-                    <div class="product-image4">
-                        <div style="cursor: pointer" @click="window.location.href = '/produkt/'+product.link" class="overlay"></div>
-                        <a :href="'/produkt/'+product.link">
-                            <img class="pic-1" :src="$parent.getImage(JSON.parse(product.images)[0])" style="max-height: 100%">
-                        </a>
-                        <div class="product-labels">
-
-                            <span v-if="product.new == 1">Nowość</span>
-
-                            <span v-if="product.quantity == 0">Niedostępny</span>
-
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h2 class="title"><a :href="$root.base_url+'/produkt/'+product.link" class="white-color" style="cursor: pointer">{{product.name}}</a></h2>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex">
-                                <div class="price" :class="{'line-through' : product.prices_sellout}">
-                                   <span class="price-small" style="font-size: 1rem">{{product.price | toCurrency}}</span>
-                                </div>
-
-                                <div class="price ml-3" v-if="product.prices_sellout">
-                                    <span class="price-small" style="font-size: 1rem">{{product.prices_sellout | toCurrency}}</span>
-                                </div>
-
+        <div class="col-md-9 position-relative">
+            <div class="row">
+                <div class="col-md-4 col-sm-6"  v-for="product in products" v-if="products.length > 0">
+                    <div class="product-grid4 border-muted animated fadeIn" :class="{'muted' : product.quantity == 0}">
+                        <div class="product-image4">
+                            <div style="cursor: pointer" @click="window.location.href = '/produkt/'+product.link" class="overlay"></div>
+                            <a :href="'/produkt/'+product.link">
+                                <img class="pic-1" :src="$parent.getImage(JSON.parse(product.images)[0])" style="max-height: 100%">
+                            </a>
+                            <div class="product-labels">
+                                <span v-if="product.availability == 0">Niedostępny</span>
+                                <span v-if="product.availability == 1">Dostępny od ręki</span>
+                                <span v-if="product.availability == 2">Dostępny na zamówienie</span>
                             </div>
-                            <div>
-                                <md-button @click="quick_view('/quick_view/'+product.link)" class="md-icon-button  md-raised md-primary">
-                                    <i  class="fas fa-eye"></i>
-                                </md-button>
-                              <!--  <md-button @click="$parent.addToCart(product)" class="md-icon-button  md-raised md-primary">
-                                    <i  class="fas fa-shopping-cart"></i>
-                                </md-button>-->
+                            <div class="new-label" v-if="product.new == 1">
+                                <img class="label-img" :src="getSrc('default/new.png')">
                             </div>
                         </div>
+                        <div class="product-content">
+                            <h2 class="title"><a :href="$root.base_url+'/produkt/'+product.link" class="white-color" style="cursor: pointer">{{product.name}}</a></h2>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex">
+                                    <div class="price" :class="{'line-through' : product.prices_sellout}">
+                                       <span class="price-small" style="font-size: 1rem">{{product.price | toCurrency}}</span>
+                                    </div>
+
+                                    <div class="price ml-3" v-if="product.prices_sellout">
+                                        <span class="price-small" style="font-size: 1rem">{{product.prices_sellout | toCurrency}}</span>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <md-button @click="quick_view('/quick_view/'+product.link)" class="md-icon-button  md-raised md-primary">
+                                        <i  class="fas fa-eye"></i>
+                                    </md-button>
+                                  <!--  <md-button @click="$parent.addToCart(product)" class="md-icon-button  md-raised md-primary">
+                                        <i  class="fas fa-shopping-cart"></i>
+                                    </md-button>-->
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+             </div>
             </div>
+
             <div v-if="products.length == 0" class="w-100 animated fadeIn text-center pt-3">
                 <h2 style="font-size: 2rem; font-weight: 200" class="white-color">Brak znalezionych produktów</h2>
             </div>
@@ -159,6 +162,9 @@
             },*/
         },
         methods:{
+            getSrc(src){
+                return base_url+'/storage/'+src;
+            },
             quick_view(link) {
                 $.get(link, function( data ) {
                     $('#product_view').replaceWith(data);

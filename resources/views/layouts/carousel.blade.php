@@ -10,7 +10,7 @@
                     $images = json_decode($carousel_item->image);
 
                     @endphp
-            <img class="d-block w-100" src="{{url('/').'/str/'.$images[0]}}" alt="First slide">
+            <img class="d-block w-100 lazy" data-src="{{url('/').'/str/'.$images[0]}}" alt="First slide">
             <div class="carousel-item-content d-flex">
                 <div class="content" style="overflow: hidden">
                     <div class="text-left" >

@@ -167,7 +167,7 @@ body {
 
 /* Products template */
 .product-grid4,.product-grid4 .product-image4{position:relative}
-.product-grid4{font-family:Poppins,sans-serif;border-radius:5px;overflow:hidden;z-index:1;transition:all .3s ease 0s}
+.product-grid4{font-family:Poppins,sans-serif;border-radius:5px;z-index:1;transition:all .3s ease 0s}
 .product-grid4 .product-image4 a{display:block}
 .product-grid4 .product-image4 img{width:100%;height:auto}
 .product-grid4 .pic-1{opacity:1;transition:all .5s ease-out 0s}

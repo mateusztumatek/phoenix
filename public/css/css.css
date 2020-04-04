@@ -1480,6 +1480,17 @@ input[type=checkbox]:checked + label:before {
   justify-content: center;
 }
 
+.new-label {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: 50px;
+  height: 50px;
+}
+.new-label .label-img {
+  height: unset !important;
+}
+
 table {
   background-color: transparent !important;
 }

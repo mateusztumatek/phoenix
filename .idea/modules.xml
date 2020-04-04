@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../angular-app/.idea/angular-app.iml" filepath="$PROJECT_DIR$/../angular-app/.idea/angular-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/phoenix.iml" filepath="$PROJECT_DIR$/.idea/phoenix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../phoenix_mobile/.idea/phoenix_mobile.iml" filepath="$PROJECT_DIR$/../phoenix_mobile/.idea/phoenix_mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../phoenix_mobile2/.idea/phoenix_mobile2.iml" filepath="$PROJECT_DIR$/../phoenix_mobile2/.idea/phoenix_mobile2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../reporter/.idea/reporter.iml" filepath="$PROJECT_DIR$/../reporter/.idea/reporter.iml" />
     </modules>
   </component>
 </project>

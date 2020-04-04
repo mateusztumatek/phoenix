@@ -87,10 +87,6 @@
      box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.78);*/
   transform: scale(1.05);
 }
-.product-grid4:hover .product-labels {
-  top: -100px;
-}
-
 .product-grid {
   font-family: Raleway, sans-serif;
   text-align: center;

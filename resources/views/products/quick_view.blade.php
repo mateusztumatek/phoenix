@@ -41,7 +41,7 @@
                                         <div class="row justify-content-between m-0 ">
                                             <h3 class="m-0">{{$prod->name}}</h3>
                                                 <div class="d-flex">
-                                                    <span class="@if($prod->prices_sellout) line-through @endif">{{explode('.', number_format( $prod->profit_price, 2))[0]}}.<span class="price-small" style="font-size: 1rem">{{explode('.', number_format( $prod->profit_price, 2))[1]}}zł</span></span>
+                                                    <span class="@if($prod->prices_sellout) line-through @endif">{{explode('.', number_format( $prod->calculated_price, 2))[0]}}.<span class="price-small" style="font-size: 1rem">{{explode('.', number_format( $prod->calculated_price, 2))[1]}}zł</span></span>
                                                     @if($prod->prices_sellout)
                                                         <span class="ml-2">{{explode('.', number_format( $prod->prices_sellout, 2))[0]}}.<span class="price-small" style="font-size: 1rem">{{explode('.', number_format( $prod->prices_sellout, 2))[1]}}zł</span></span>
                                                     @endif

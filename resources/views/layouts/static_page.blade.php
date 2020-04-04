@@ -1,3 +1,6 @@
+@if(\App\Services\Help::isMobile())
+    @include('mobile')
+    @else
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -60,7 +63,7 @@
 
     <div class="site-loader">
         <div class="content">
-            <img class="image-loader" src="{{url('default/szop-sam.png')}}">
+            <img class="image-loader lazy" data-src="{{url('default/szop-sam.png')}}">
         </div>
     </div>
     <div class="loader">
@@ -72,7 +75,7 @@
     <div class="flex-center position-ref full-height">
         @if(strpos(url()->current(), 'strona') !== false)
             <div class="static-banner d-flex justify-content-start align-items-center give-me-space" >
-                <img src="{{url('/str/'.$page->background)}}">
+                <img class="lazy" data-src="{{url('/str/'.$page->background)}}">
 
             </div>
         @else
@@ -139,8 +142,9 @@
         }
     }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.0.0/dist/lazyload.min.js"></script>
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/app.js')}}?hash=fwafwafwawa"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{asset('js/custom.js')}}"></script>
@@ -155,3 +159,4 @@
 @yield('scripts_after')
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </html>
+@endif

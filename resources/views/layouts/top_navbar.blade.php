@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top " style="position: fixed !important;">
         <div class="container">
 
-        <a class="navbar-brand" href="{{route('home')}}">    <img src="{{url('/').'/str/'.setting('site.logo')}}" class="logo"></a>
+        <a class="navbar-brand" href="{{route('home')}}">    <img data-src="{{url('/').'/str/'.setting('site.logo')}}" class="logo lazy"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,10 +49,10 @@
                 {{menu('top_menu', 'vendor.voyager.mymenu')}}
                 <div class="ml-4 d-flex">
                     <li class="nav-item">
-                        <a href="https://www.facebook.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social" src="{{url('default/fb-icon.png')}}" style="max-width: 20px"></a>
+                        <a href="https://www.facebook.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social lazy" data-src="{{url('default/fb-icon.png')}}" style="max-width: 20px"></a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.instagram.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social" src="{{url('default/ig-icon.png')}}" style="max-width: 20px"></a>
+                        <a href="https://www.instagram.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social lazy" data-src="{{url('default/ig-icon.png')}}" style="max-width: 20px"></a>
                     </li>
                 </div>
 

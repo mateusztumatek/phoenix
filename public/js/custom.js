@@ -4,6 +4,10 @@ var outerPane = $('#content');
 var timeout = null;
 var check = false;
 didScroll = false;
+var lazyLoadInstance = new LazyLoad({
+    elements_selector: ".lazy"
+    // ... more custom settings?
+});
 function roundRect(ctx, x, y, width, height, radius) {
     if (typeof radius === 'undefined') {
         radius = 5;
@@ -49,6 +53,9 @@ $(document).ready(function () {
            $(object).removeClass('active');
        })
     })*/
+    if (lazyLoadInstance) {
+        lazyLoadInstance.update();
+    }
     $('#produkty-menu').hover(function() {
         $(this).dropdown('toggle')
     }, function() {
@@ -116,6 +123,7 @@ $(document).ready(function () {
             }
         ]
     });
+
     $('#featured_slider').slick({
         slidesToShow: 5,
         slidesToScroll: 1,
@@ -165,7 +173,11 @@ $(document).ready(function () {
         ]
     });
 
-
+    $('#product_slider, #featured_slider, .populary-product-slider, #gallery_slider').on('afterChange', function () {
+        if (lazyLoadInstance) {
+            lazyLoadInstance.update();
+        }
+    })
     if(typeof slider_values !== 'undefined'){
         initSlider();
 

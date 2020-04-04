@@ -11,8 +11,14 @@
                     @if($product->new)
                      <span>Nowość</span>
                     @endif
-                        @if($product->quantity == 0)
+                        @if($product->availability == 0)
                             <span>Niedostępny</span>
+                        @endif
+                        @if($product->availability == 1)
+                            <span>Dostępny od ręki</span>
+                        @endif
+                        @if($product->availability == 2)
+                            <span>Dostępny na zamówienie</span>
                         @endif
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 
 @endphp
 <div class="static-banner d-flex justify-content-start align-items-center give-me-space" >
-    <img src="{{url('/str/'.$images[0])}}">
+    <img class="lazy" data-src="{{url('/str/'.$images[0])}}">
 
     <div class="text-left" style="z-index: 1000">
         <h3 class="banner-header">{{$static_banner->name}}</h3>

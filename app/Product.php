@@ -12,7 +12,8 @@ class Product extends Model
 {
 
     public $profit_price = 0;
-    protected $fillable = ['name','content', 'price', 'prices_sellout', 'new', 'size', 'weight', 'profit', 'images', 'active', 'quantity', 'count', 'color'];
+    protected $fillable = ['name','content', 'price', 'prices_sellout', 'new', 'size', 'weight', 'profit', 'images', 'active', 'quantity', 'count', 'color', 'availability'];
+    public $appends = ['calculated_price', 'is_sellout', 'slug', 'imgs'];
     protected $table = 'products';
     public $categories = array();
    public function __construct(array $attributes = array())
@@ -21,7 +22,24 @@ class Product extends Model
         $this->profit_price = $this->price + floatval(setting('admin.profit'));
 
      }
-
+     public function getSlugAttribute(){
+       return \App\Services\Help::slugify($this->name);
+     }
+    public function getCalculatedPriceAttribute(){
+       if($this->prices_sellout && $this->price > $this->prices_sellout) return $this->prices_sellout;
+       return $this->price;
+    }
+    public function getImgsAttribute(){
+        $images = json_decode(($this->images), true);
+        $array = [];
+        if(count($images) == 0){
+            array_push($images, '/default/no_image.png');
+        }
+       return $images;
+    }
+    public function getIsSelloutAttribute(){
+        return $this->prices_sellout && $this->price > $this->prices_sellout;
+    }
      public function inSubcategory(Subcategory $subcategory){
         if(is_array($this->categories)){
         }
@@ -67,10 +85,24 @@ class Product extends Model
      public function getMaterials(){
          return DB::table('product_materials')->where('product_id', $this->id)->get();
      }
+     public function materials(){
+       return $this->hasMany('App\Relations\ProductMaterial', 'product_id');
+     }
+    public function tags(){
+        return $this->hasMany('App\Relations\ProductTag', 'product_id');
+    }
+    public function categories(){
+       return $this->belongsToMany('App\Category', 'product_categories');
+    }
+    public function collections(){
+       return $this->belongsToMany('App\Collection', 'collection_items');
+    }
      public function getStock(){
          return DB::table('stock_availability')->where('product_codeShort', $this->codeShort)->first();
      }
-
+    public function rates(){
+       return $this->hasMany('App\Rate', 'product_id');
+    }
      public function getRate(){
        $rates= Rate::where('product_id', $this->id)->get();
        if(count($rates) == 0) return 5;
@@ -93,14 +125,14 @@ class Product extends Model
        $this->setAttribute('materials', $this->getMaterials());
        $this->setAttribute('tags', $this->getTags());
        $this->setAttribute('link', $this->id.'/'.Help::slugify($this->name));
-       if($this->profit != NULL){
+       /*if($this->profit != NULL){
            if($this->profit > 0){
                $this->profit_price = $this->price + $this->profit;
            }
        } else {
            $this->profit_price = $this->price + setting('admin.profit');
        }
-         ($this->price > $this->prices_sellout && $this->prices_sellout != null && $this->prices_sellout != '')? $this->price = $this->prices_sellout : null;
+         ($this->price > $this->prices_sellout && $this->prices_sellout != null && $this->prices_sellout != '')? $this->price = $this->prices_sellout : null;*/
      }
     public function scopeFilter($q)
     {

@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function index($page){
+    public function index(Request $request, $page){
         $page = Page::where('url', $page)->first();
+        if($request->header('ajax')){
+            return response()->json($page);
+        }
         return view('page', compact('page'));
     }
 }

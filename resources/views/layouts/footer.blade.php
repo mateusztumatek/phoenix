@@ -3,7 +3,7 @@ $footer_items = \App\Page::where('bottom_menu_active', 1)->where('name', '!=', '
 $footer = \App\Page::where('bottom_menu_active', 1)->where('name', 'footer')->first();
 @endphp
 
-<footer style="background-image: url('{{url('/default/footer.jpg')}}'); background-position: center; background-size: cover">
+<footer class="lazy" data-bg="url('{{url('/default/footer.jpg')}}'" style="background-position: center; background-size: cover">
     <div class="footer-logo">
         <div class="footer-logo">
             <img src="{{url('/default/szop-sam.png')}}">
@@ -27,8 +27,8 @@ $footer = \App\Page::where('bottom_menu_active', 1)->where('name', 'footer')->fi
             </div>
             <div class="col-md-12 col-sm-12">
               <div class="col-sm-12 d-flex justify-content-center">
-                  <a href="https://www.instagram.com/raccmoon.craft/" class="icon-social"><img src="{{url('/default/ig-icon.png')}}" class="w-100"></a>
-                  <a href="https://www.facebook.com/raccmoon.craft/" class="ml-3 icon-social"><img src="{{url('/default/fb-icon.png')}}" class="w-100"></a>
+                  <a href="https://www.instagram.com/raccmoon.craft/" class="icon-social"><img data-src="{{url('/default/ig-icon.png')}}" class="w-100 lazy"></a>
+                  <a href="https://www.facebook.com/raccmoon.craft/" class="ml-3 icon-social"><img data-src="{{url('/default/fb-icon.png')}}" class="w-100 lazy"></a>
 
               </div>
             </div>

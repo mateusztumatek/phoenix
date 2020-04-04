@@ -12,4 +12,7 @@ class Gallery extends Model
     public function product(){
         return Product::findOrFail($this->product_id);
     }
+    public function prod(){
+        return $this->belongsTo('App\Product', 'product_id');
+    }
 }

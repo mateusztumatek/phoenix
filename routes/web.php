@@ -77,6 +77,6 @@ Route::group(['middleware' => 'Cart'], function(){
 
     /* End Cart Routes */
     /* API */
-
+    Route::get('/app_info', 'ApiController@info');
     Route::get('/api/order/{hash}', 'ApiController@order');
 });
