@@ -46,6 +46,7 @@ class CleanProducts extends Command
                ]);
            }
         }
+        DB::table('product_tags')->where('id', '<', 767)->delete();
         dd('GOTOWE');
         DB::table('products')->truncate();
         DB::table('product_categories')->truncate();
