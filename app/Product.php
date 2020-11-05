@@ -101,6 +101,9 @@ class Product extends Model
     public function categories(){
        return $this->belongsToMany('App\Category', 'product_categories');
     }
+    public function getMaterials(){
+       return $this->materials;
+    }
     public function collections(){
        return $this->belongsToMany('App\Collection', 'collection_items');
     }
