@@ -45,7 +45,10 @@ iframe{
     }
   }
 
-
+  .nav-item{
+    display: flex;
+    align-items: center;
+  }
 }
 
 .count_fav{

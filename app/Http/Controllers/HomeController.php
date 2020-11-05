@@ -58,11 +58,9 @@ class HomeController extends Controller
         $count = count($products);
 
         $products = new LengthAwarePaginator(array_slice($array, $this->offset, $this->per_page, true), count($products), $this->per_page, $this->page, ['path' => $request->url(), 'query' => $request->query()]);*/
-
         if($request->ajax()){
             return view('products.product_grid', compact('products'))->render();
         }
-
 
         return view('home', compact('products', 'tags'));
 
@@ -108,6 +106,7 @@ class HomeController extends Controller
             return response()->json(['products' => $products, 'page' => $page, 'gallery' => $gallery, 'services' => $services, 'carousel' => $carousel]);
 
         }
+
         return view('new_home', compact('products', 'page', 'gallery'));
     }
     public function search(Request $request){
@@ -177,7 +176,9 @@ class HomeController extends Controller
         return view('saved');
     }
     public function gallery(Request $request){
-        $gallery = Gallery::all();
+        $gallery = Gallery::with('prod')->where(function ($q)use($request){
+            if($request->product_id) $q->where('product_id', $request->product_id);
+        })->get();
         if($request->header('ajax')){
             return response()->json($gallery);
         }

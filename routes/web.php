@@ -16,6 +16,7 @@ Route::get('/fire', function (){
    event(new \App\Events\OrderStatusChange);
 });
 Route::group(['middleware' => 'Cart'], function(){
+
     Route::get('/kategoria/{category}', 'HomeController@showCategory')->name('category');
     Route::get('/kategoria/{category}/podkategoria/{subcategory}', 'HomeController@showCategory')->name('subcategory');
     Route::post('/add_item_to_cart', 'CartController@addItem')->name('add_item_to_cart');
@@ -42,7 +43,6 @@ Route::group(['middleware' => 'Cart'], function(){
 
     Route::get('/strona/{page}', 'PageController@index');
     Route::get('/kolekcje/', 'CollectionController@index');
-    Route::get('/', 'HomeController@home')->name('home');
     Route::get('/produkty', 'HomeController@index')->name('items');
     Route::get('/search', 'HomeController@search')->name('search');
     Route::post('/add_comment/{product}', 'RatesController@store')->name('add.comment');
@@ -79,4 +79,8 @@ Route::group(['middleware' => 'Cart'], function(){
     /* API */
     Route::get('/app_info', 'ApiController@info');
     Route::get('/api/order/{hash}', 'ApiController@order');
+    Route::get('/', function (){
+        return view('building');
+    });
 });
+Route::get('/', 'HomeController@home')->name('home');

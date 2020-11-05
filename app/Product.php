@@ -13,14 +13,16 @@ class Product extends Model
 
     public $profit_price = 0;
     protected $fillable = ['name','content', 'price', 'prices_sellout', 'new', 'size', 'weight', 'profit', 'images', 'active', 'quantity', 'count', 'color', 'availability'];
-    public $appends = ['calculated_price', 'is_sellout', 'slug', 'imgs'];
+    public $appends = ['calculated_price', 'is_sellout', 'slug', 'imgs', 'has_gallery'];
     protected $table = 'products';
     public $categories = array();
    public function __construct(array $attributes = array())
     {
         $elem = parent::__construct($attributes);
         $this->profit_price = $this->price + floatval(setting('admin.profit'));
-
+     }
+     public function getHasGalleryAttribute(){
+       return $this->hasMany('App\Gallery')->count();
      }
      public function getSlugAttribute(){
        return \App\Services\Help::slugify($this->name);
@@ -57,7 +59,15 @@ class Product extends Model
          }
 
      }
-
+    public function getAvailabilityAttribute($data){
+        if(\request()->route() && \request()->route()->getPrefix() == '/admin') return $data;
+        $arr = [
+            0 => 'Niedostępny',
+            1 => 'Dostępny od ręki',
+            2 => 'Dostępny na zamówienie'
+        ];
+        return $arr[$data];
+    }
      public function getLink(){
         return url('/produkt/'.$this->id.'/'.\App\Services\Help::slugify($this->name));
      }
@@ -81,9 +91,6 @@ class Product extends Model
      }
      public function getTags(){
        return DB::table('product_tags')->where('product_id', $this->id)->get();
-     }
-     public function getMaterials(){
-         return DB::table('product_materials')->where('product_id', $this->id)->get();
      }
      public function materials(){
        return $this->hasMany('App\Relations\ProductMaterial', 'product_id');
@@ -122,7 +129,7 @@ class Product extends Model
          Storage::deleteDirectory('projects/'.$folder_path);
      }
      public function init(){
-       $this->setAttribute('materials', $this->getMaterials());
+       $this->load('materials');
        $this->setAttribute('tags', $this->getTags());
        $this->setAttribute('link', $this->id.'/'.Help::slugify($this->name));
        /*if($this->profit != NULL){

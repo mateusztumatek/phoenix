@@ -75,10 +75,9 @@
                                 </div>
 
                             @endforeach
-                            <div class="col-sm-4 col-xs-12">
+                          {{--  <div class="col-sm-4 col-xs-12">
                                 <li onclick="window.location.href = $(this).children()[0].href"><a href="{{url('/kolekcje')}}" class="black-color">Biżuteria FANBAZOWA</a></li>
-
-                            </div>
+                            </div>--}}
                         </div>
                         @php
                             $collection = \App\Collection::where('display_on_home', 1)->first();

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Material;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -38,6 +39,14 @@ class CleanProducts extends Command
      */
     public function handle()
     {
+        foreach (DB::table('product_materials')->get() as $material){
+           if(!Material::where('name', $material->name)->first()){
+               Material::create([
+                   'name' => $material->name
+               ]);
+           }
+        }
+        dd('GOTOWE');
         DB::table('products')->truncate();
         DB::table('product_categories')->truncate();
         DB::table('product_materials')->truncate();

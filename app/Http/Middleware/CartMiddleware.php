@@ -18,7 +18,6 @@ class CartMiddleware
     public function handle($request, Closure $next)
     {
 /*        Session::forget('cart');*/
-        if(!Session::has('cart')) Session::put('cart', new Cart());
         return $next($request);
     }
 }

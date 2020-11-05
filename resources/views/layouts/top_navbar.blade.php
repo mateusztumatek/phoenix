@@ -2,7 +2,6 @@
     $cart = Session::has('cart')? Session::get('cart') : null;
     $menu_pages = \App\Page::where('top_menu_active', 1)->get();
     $brands = \App\Category::join('brands', 'pro_categories.name', 'brands.name')->select('pro_categories.*')->get();
-
 @endphp
 
 <div class="errors @if(\Illuminate\Support\Facades\Session::has('errors')) active-errors @elseif(\Illuminate\Support\Facades\Session::has('message')) active-errors  @endif">
@@ -49,10 +48,10 @@
                 {{menu('top_menu', 'vendor.voyager.mymenu')}}
                 <div class="ml-4 d-flex">
                     <li class="nav-item">
-                        <a href="https://www.facebook.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social lazy" data-src="{{url('default/fb-icon.png')}}" style="max-width: 20px"></a>
+                        <a href="https://www.facebook.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social lazy" data-src="{{url('default/fb-icon.png')}}" style="max-width: 30px"></a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.instagram.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social lazy" data-src="{{url('default/ig-icon.png')}}" style="max-width: 20px"></a>
+                        <a href="https://www.instagram.com/raccmoon.craft/" target="_blank" class="nav-link pl-0 pr-0"><img class="icon-social lazy" data-src="{{url('default/ig-icon.png')}}" style="max-width: 30px"></a>
                     </li>
                 </div>
 

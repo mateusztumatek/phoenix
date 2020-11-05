@@ -10,14 +10,8 @@
                       <!--  <div class="sign" v-if="product.quantity > 0 && product.quantity < 2">
                             Ostatnie sztuki
                         </div>-->
-                        <div class="sign" v-if="product.availability == 0">
-                            Niedostępne
-                        </div>
-                        <div class="sign" v-if="product.availability == 1" style="font-size:0.6rem">
-                            Dostępne od ręki
-                        </div>
-                        <div class="sign" v-if="product.availability == 2" style="font-size: 0.6rem">
-                            Na zamówienie
+                        <div class="sign" style="font-size: 0.6rem; line-height:initial">
+                            {{product.availability}}
                         </div>
                     </div>
                     <img class="w-100 hover-image" :src="getSrc(JSON.parse(product.images)[0])">
@@ -36,9 +30,6 @@
                             <div class="fb-share-button" :data-href="$root.base_url+'/produkt/'+product.id+'/'+product.name" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Udostępnij</a></div>
                         </div>
                     </div>
-                    <div class="col-md-6 mt-3">
-                        <span class="badge badge-pill badge-primary py-2 px-3 white-background" v-for="tag in product.tags">{{tag.tag}}</span>
-                    </div>
                     <div class="d-flex flex-wrap">
                         <div class="col-auto mt-3" v-if="product.prices_sellout">
                             <div style="font-size: 2.5rem; line-height: 2.5rem; font-weight: 200" class="white-color">{{product.prices_sellout | toCurrency}}</div>
@@ -50,26 +41,29 @@
 
 
                     <div class="col-md-12 mt-3 white-color">
-                        <span style="opacity:0.5">Opis:</span>
-                        <br>
-                        <p style="letter-spacing: 1px; font-weight: 300">{{product.intro}}</p>
+                        <div style="opacity:0.5">Opis:</div>
+                        <p style="letter-spacing: 1px; font-weight: 300" class="mt-3">{{product.intro}}</p>
                         <p v-if="product.weight" style="letter-spacing: 1px; font-weight: 300">Waga: <strong>{{product.weight}}</strong></p>
                         <p v-if="product.size" style="letter-spacing: 1px; font-weight: 300">Rozmiar: <strong>{{product.size}}</strong></p>
                         <p v-if="product.color" style="letter-spacing: 1px; font-weight: 300">Kolor: <strong>{{product.color}}</strong></p>
-
+                        <p style="letter-spacing: 1px; font-weight: 300"> Materiały: <span v-for="(material,index) in product.materials">{{material.name}}<span v-if="product.materials.length != index + 1">,</span> </span></p>
 
                     </div>
+                    <div class="col-md-6 mt-3 py-3">
+                        <span class="badge badge-pill badge-primary py-2 px-3 white-background" v-for="tag in product.tags">{{tag.tag}}</span>
+                    </div>
                     <div class="col-md-12">
-                        <p class="text-center white-color font-weight-bold">Zapytaj o ten produkt:</p>
+                        <p class="text-center white-color font-weight-bold">Zamów lub zapytaj o ten produkt:</p>
                         <md-field>
                             <label>Zapytaj o ten produkt</label>
                             <md-textarea v-model="message"></md-textarea>
                         </md-field>
                         <md-field>
-                            <label>Podaj swój adres e-mail, na niego wyślę odpowiedź</label>
+                            <label>Podaj swój adres e-mail, na który zostanie wysłana odpowiedź</label>
                             <md-input type="email" v-model="email"></md-input>
                         </md-field>
-                        <md-button @click="sendMessage()" class="md-raised md-primary white-color m-0 mt-1 w-100">Wyślij zapytanie</md-button>
+                        <md-button @click="sendMessage()" class="md-raised md-primary white-color m-0 mt-1 w-100">Wyślij</md-button>
+                        <md-button v-if="product.has_gallery" :href="'/galeria?product_id='+product.id" class="md-raised md-primary white-color m-0 mt-3 w-100">Zobacz zdjęcia klientów</md-button>
                     </div>
                    <!-- <div class="col-md-12 d-flex align-items-center flex-wrap">
                         <div class="col-md-4 d-flex align-items-center">
@@ -101,7 +95,6 @@
                     <md-tabs @md-changed="changeTab" md-sync-route class="col-md-10" md-dynamic-height>
                         <md-tab id="opis" md-label="Opis" to="?tab=opis"exact>
                             <p v-html="product.content"></p>
-                            <p class="mb-0">Materiały: <span v-for="material in product.materials">{{material.name}}, </span></p>
                         </md-tab>
                         <md-tab id="oceny" md-label="Oceny" to="?tab=oceny"exact>
                             <p>Ocena tego produktu: <span style="font-size: 2rem;font-weight: bold" class="ml-2" v-if="rate != null">{{(rate).toFixed(1)}}</span></p>

@@ -940,7 +940,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst env = 'production';\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n    api_url: (env == 'local')? 'http://127.0.0.1:8000' : 'https://raccmoon-craft.pl'\r\n});\r\n\n\n//# sourceURL=webpack:///./src/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n    api_url: ( true)? 'http://127.0.0.1:8000' : undefined\r\n});\r\n\n\n//# sourceURL=webpack:///./src/config.js?");
 
 /***/ }),
 

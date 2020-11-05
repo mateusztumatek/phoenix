@@ -36,7 +36,7 @@
                             @endif
                         </div>
                         <md-button @click="addToCart({{$product}})" class="md-icon-button  md-raised md-primar">
-                            <i  class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-shopping-cart"></i>
                         </md-button>
                     </div>
                 </div>

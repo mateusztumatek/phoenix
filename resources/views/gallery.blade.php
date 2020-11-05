@@ -34,10 +34,10 @@
                                               </p>
                                           @endif
                                       </div>
-                                 @if($g->product_id)
+                                 @if($g->product_id && $g->prod)
 
                                 <div class="d-flex justify-content-center">
-                                    <a  style="padding: 25px 10px !important; text-align: center !important;" class="my-button-border w-100 white-color" href="{{url('/produkt/'.$g->product_id.'/'.\App\Services\Help::slugify($g->product()->name))}}">zobacz produkt</a>
+                                    <a  style="padding: 25px 10px !important; text-align: center !important;" class="my-button-border w-100 white-color" href="{{url('/produkt/'.$g->product_id.'/'.\App\Services\Help::slugify($g->prod->name))}}">zobacz produkt</a>
 
                                 </div>
                                 @endif

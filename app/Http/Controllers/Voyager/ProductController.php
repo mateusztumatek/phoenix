@@ -272,10 +272,9 @@ class ProductController extends VoyagerBaseController
         foreach (DB::table('product_materials')->where('product_id', $product->id)->get() as $material){
             array_push($product_materials, Material::where('name', $material->name)->first());
         }
-
         $tags = DB::table('product_tags')->where('product_id', $product->id)->get();
         $product_materials = collect($product_materials);
-        $product_categories =collect($product_categories);
+        $product_categories = collect($product_categories);
         return view('vendor.voyager.products.edit-add', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'categories','product_categories','product_materials','materials','tags'));
     }
 
@@ -327,22 +326,19 @@ class ProductController extends VoyagerBaseController
                 ]);
             }
         }
+        DB::table('product_tags')->where('product_id', $product->id)->delete();
         if($request->tags){
-            if($request->tags[0] == null){
-                DB::table('product_tags')->where('product_id', $product->id)->delete();
-            } else {
-                DB::table('product_tags')->where('product_id', $product->id)->delete();
-                foreach (explode(',', $request->tags) as $tag){
-                    $t = str_replace(' ','', $tag);
-                    $t = str_replace('\t','', $t);
-                    DB::table('product_tags')->insert([
-                        'product_id' => $product->id,
-                        'tag' => $t,
-                    ]);
-                }
+            foreach (explode(',', $request->tags) as $tag){
+                $t = str_replace(' ','', $tag);
+                $t = str_replace('\t','', $t);
+                DB::table('product_tags')->insert([
+                    'product_id' => $product->id,
+                    'tag' => $t,
+                ]);
             }
-
         }
+
+
         return redirect()
             ->route("voyager.{$dataType->slug}.index")
             ->with([
