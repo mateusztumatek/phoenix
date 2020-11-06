@@ -26,7 +26,7 @@ $white-color: #d6d6d6;
 }
 
 .product-grid4{
-
+  height: 100%;
   border-radius: 0px;
   position: relative;
   .product-labels{
@@ -476,7 +476,7 @@ h1 { font-size: 1.5em; margin: 10px; }
     }
     span{
       color: $primary-color !important;
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
   .modal-dialog{
@@ -578,7 +578,6 @@ h1 { font-size: 1.5em; margin: 10px; }
   }
 }
 .border-muted{
-  border: 1px solid rgba(255,255,255,0.1);
   padding: 3px;
   margin-bottom: 10px;
 }
@@ -610,4 +609,35 @@ form{
 }
 .heart-icon-active{
   color: $white-color !important;
+}
+
+.md-field{
+  label{
+    font-size: 14px !important;
+  }
+}
+.signs{
+  display: flex;
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  padding: 10px;
+  .sign{
+    margin: 7px;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    text-align:center;
+    padding: 15px;
+    background-color: $white-color;
+    color: $primary-color;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight: bold;
+    font-size: 0.7rem;
+    -webkit-box-shadow: 3px 3px 14px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 3px 3px 14px -1px rgba(0,0,0,0.6);
+    box-shadow: 3px 3px 14px -1px rgba(0,0,0,0.6);
+  }
 }

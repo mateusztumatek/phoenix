@@ -42,9 +42,12 @@
 
                     <div class="col-md-12 mt-3 white-color">
                         <div style="opacity:0.5">Opis:</div>
-                        <p style="letter-spacing: 1px; font-weight: 300" class="mt-3">{{product.intro}}</p>
+                        <p style="letter-spacing: 1px; font-weight: 300" class="mt-3" v-html="product.content"></p>
                         <p v-if="product.weight" style="letter-spacing: 1px; font-weight: 300">Waga: <strong>{{product.weight}}</strong></p>
-                        <p v-if="product.size" style="letter-spacing: 1px; font-weight: 300">Rozmiar: <strong>{{product.size}}</strong></p>
+                        <div class="d-flex mb-2">
+                            <p v-if="product.size" style="letter-spacing: 1px; font-weight: 300">Rozmiar:</p>
+                            <div class="ml-1"><span v-for="el in explode(product.size)">{{el}}<br></span></div>
+                        </div>
                         <p v-if="product.color" style="letter-spacing: 1px; font-weight: 300">Kolor: <strong>{{product.color}}</strong></p>
                         <p style="letter-spacing: 1px; font-weight: 300"> Materiały: <span v-for="(material,index) in product.materials">{{material.name}}<span v-if="product.materials.length != index + 1">,</span> </span></p>
 
@@ -89,59 +92,6 @@
             <span class="alert alert-info w-100 my-3 d-block" v-for="error in errors">{{error}}</span>
         </div>
 
-        <div class="section-white mt-5 position-relative">
-            <div class="container">
-                <div class="d-flex">
-                    <md-tabs @md-changed="changeTab" md-sync-route class="col-md-10" md-dynamic-height>
-                        <md-tab id="opis" md-label="Opis" to="?tab=opis"exact>
-                            <p v-html="product.content"></p>
-                        </md-tab>
-                        <md-tab id="oceny" md-label="Oceny" to="?tab=oceny"exact>
-                            <p>Ocena tego produktu: <span style="font-size: 2rem;font-weight: bold" class="ml-2" v-if="rate != null">{{(rate).toFixed(1)}}</span></p>
-                            <hr>
-                            <div class="animated fadeIn" v-if="!comment_done">
-                                <p>Zostaw swoją ocenę</p>
-                                <div class="wrapper">
-                                    <i @click="setRate(1)" class="far fa-star star-label" :class="{'fa' : currentRate >= 1}" data-star="1"></i>
-                                    <i @click="setRate(2)" class="far fa-star star-label" :class="{'fa' : currentRate >= 2}" data-star="2"></i>
-                                    <i @click="setRate(3)" class="far fa-star star-label" :class="{'fa' : currentRate >= 3}" data-star="3"></i>
-                                    <i @click="setRate(4)" class="far fa-star star-label" :class="{'fa' : currentRate >= 4}" data-star="4"></i>
-                                    <i @click="setRate(5)" class="far fa-star star-label" :class="{'fa' : currentRate >= 5}" data-star="5"></i>
-                                </div>
-                               <!-- <md-field class="mt-3">
-                                    <label>Twój komentarz</label>
-                                    <md-textarea v-model="comment"></md-textarea>
-                                </md-field>-->
-                                <md-button @click="addComment()" class="md-raised md-primary m-0 white-color my-3">Dodaj ocenę</md-button>
-                            </div>
-                            <span v-if="comment_done" class="animated fadeIn">Dodałeś swoją ocenę!</span>
-                            <div class="col-md-12 pl-0 d-flex flex-wrap my-2" style="align-items: baseline" v-for="(comment, key) in comments_filtered">
-                                <div class="position-relative">
-                                    <div class="wrapper" v-if="comment.rate != null">
-                                        <i class="far fa-star star-label" :class="{'fa' : comment.rate >= 1}" data-star="1"></i>
-                                        <i class="far fa-star star-label" :class="{'fa' : comment.rate >= 2}" data-star="2"></i>
-                                        <i  class="far fa-star star-label" :class="{'fa' : comment.rate >= 3}" data-star="3"></i>
-                                        <i  class="far fa-star star-label" :class="{'fa' : comment.rate >= 4}" data-star="4"></i>
-                                        <i class="far fa-star star-label" :class="{'fa' : comment.rate >= 5}" data-star="5"></i>
-                                    </div>
-                                    <div class="not-hover"></div>
-                                </div>
-                                <p class="ml-3 "> Dodane dnia: {{comment.created_at.substr(0,11)}}</p>
-                                <div class="w-100">
-                                    <p>{{comment.description}}</p>
-                                </div>
-                                <hr>
-                            </div>
-                            <md-button @click="show_all = true" class="md-raised md-primary" v-if="!show_all && comments.length > 5">Zobacz więcej</md-button>
-                        </md-tab>
-                    </md-tabs>
-                    <div class="col-md-2">
-                        <img class="tab-image"  :src="$root.base_url+'/default/'">
-                    </div>
-                </div>
-
-            </div>
-        </div>
         <h3 class="header1 mt-5">Podobne przedmioty</h3>
         <div class="container">
             <div id="featured_slider">
@@ -237,6 +187,9 @@
             }
         },
         methods:{
+            explode(string){
+                return string.split(",");
+            },
             sendMessage(){
                 let v =this;
                 var errors = false;
@@ -401,29 +354,5 @@
         border: none !important;
         color: $white-color !important;
     }
-    .signs{
-        display: flex;
-        position: absolute;
-        top: -20px;
-        left: 20px;
-        padding: 10px;
-        .sign{
-            margin: 7px;
-            width: 70px;
-            height: 70px;
-            border-radius: 35px;
-            text-align:center;
-            padding: 15px;
-            background-color: $white-color;
-            color: $primary-color;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            font-weight: bold;
-            font-size: 0.7rem;
-            -webkit-box-shadow: 3px 3px 14px -1px rgba(0,0,0,0.6);
-            -moz-box-shadow: 3px 3px 14px -1px rgba(0,0,0,0.6);
-            box-shadow: 3px 3px 14px -1px rgba(0,0,0,0.6);
-        }
-    }
+
 </style>

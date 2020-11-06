@@ -45,10 +45,11 @@ iframe{
     }
   }
 
-  .nav-item{
-    display: flex;
-    align-items: center;
-  }
+
+}
+.nav-item{
+  display: flex !important;
+  align-items: center !important;
 }
 
 .count_fav{
@@ -148,6 +149,7 @@ footer{
   transform: scale(0);
   position: absolute;
   .dropdown-content{
+    padding: 20px;
     background-color: white;
     width: 70%;
     max-height: 400px;

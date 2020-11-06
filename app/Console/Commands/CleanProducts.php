@@ -39,13 +39,15 @@ class CleanProducts extends Command
      */
     public function handle()
     {
+        dd('fwa');
+        DB::table('product_materials')->where('name', 'Aksamitka')->delete();
+
         foreach (DB::table('product_materials')->get() as $material){
            if(!Material::where('name', $material->name)->first()){
-               Material::create([
-                   'name' => $material->name
-               ]);
+               DB::table('product_materials')->where('id', $material->id)->delete();
            }
         }
+        dd('fwa');
         DB::table('product_tags')->where('id', '<', 767)->delete();
         dd('GOTOWE');
         DB::table('products')->truncate();

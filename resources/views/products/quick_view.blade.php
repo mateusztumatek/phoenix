@@ -29,6 +29,12 @@
                                             </a>
 
                                     @endforeach
+                                <div class="signs">
+                                    <div class="sign" style="font-size: 0.6rem; line-height:initial">
+                                        {{$prod->availability}}
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -69,7 +75,7 @@
                                 @php
                                     $materials = $prod->getMaterials();
                                 @endphp
-                                <p><span class="description">Materiały:</span> @foreach($materials as $key => $material){{$material->name}} @if($key != count($materials) - 1),@endif  @endforeach</p>
+                                <p><span class="description">Materiały:</span> @foreach($materials as $key => $material){{$material->name}} @if($key != count($materials) - 1), @endif  @endforeach</p>
                                 @if($prod->color)
                                     <p><span class="description">Kolor:</span> {{$prod->color}}</p>
                                 @endif
@@ -78,7 +84,6 @@
                                 @else
 
                                     {{--<p><strong class="description">Dostępnych sztuk: {{$prod->quantity}} </strong></p>--}}
-                                    <p><strong class="description">{{$prod->availability}} </strong></p>
                                 @endif
 
 
@@ -90,7 +95,7 @@
                                     <div class="form-group row mt-2">
                                         <label for="staticEmail" class="col-sm-2 col-form-label vertical-align">Twój e-mail</label>
                                         <div class="col-sm-10">
-                                            <input type="email" name="email" class="form-control-plaintext" id="staticEmail" placeholder="Na ten e-mail zostanie wysłana odpowiedź np. jankowalski@gmail.com" required>
+                                            <input type="email" name="email" class="form-control-plaintext" id="staticEmail" placeholder="Na ten e-mail zostanie wysłana odpowiedź." required>
                                         </div>
                                     </div>
 

@@ -60,7 +60,7 @@
                 @endif
                 @if($item->route == 'items')
                 <ul role="menu" class="dropdown-menu" aria-labelledby="produkty-menu">
-                    <div class="m-auto dropdown-content row ">
+                    <div class="m-auto dropdown-content row">
                         <div class="col-md-8 row align-content-center">
                             <div class="col-sm-4" >
                                 <li onclick="window.location.href = $(this).children()[0].href"><a class="black-color" href="{{url('/produkty')}}">Wszystkie produkty</a></li>
@@ -86,7 +86,7 @@
                             }
                         @endphp
                         @if($collection)
-                        <div class="col-sm-4 xs-hidden" style="padding: 15px 0px; display: flex">
+                       {{-- <div class="col-sm-4 xs-hidden" style="padding: 15px 0px; display: flex">
                             <div class="menu-products row">
                                 <div class="border"><div></div></div>
                                 <div class="col-md-6 d-flex justify-content-around h-100" >
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>--}}
                             @endif
                     </div>
 

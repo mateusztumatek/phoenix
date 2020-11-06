@@ -34,9 +34,10 @@ iframe {
   animation-duration: 300ms;
   animation-fill-mode: forwards;
 }
-.navbar .nav-item {
-  display: flex;
-  align-items: center;
+
+.nav-item {
+  display: flex !important;
+  align-items: center !important;
 }
 
 .count_fav {
@@ -135,6 +136,7 @@ footer .footer-logo .footer-logo img {
   width: 100%;
 }
 .dropdown-menu .dropdown-content {
+  padding: 20px;
   background-color: white;
   width: 70%;
   max-height: 400px;

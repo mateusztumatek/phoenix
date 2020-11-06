@@ -5,7 +5,7 @@
         </div>
         <div class="col-md-9 position-relative">
             <div class="row">
-                <div class="col-md-4 col-sm-6"  v-for="product in products" v-if="products.length > 0">
+                <div class="col-md-4 col-sm-6 py-3"  v-for="product in products" v-if="products.length > 0">
                     <div class="product-grid4 border-muted animated fadeIn" :class="{'muted' : product.quantity == 0}">
                         <div class="product-image4">
                             <div style="cursor: pointer" @click="window.location.href = '/produkt/'+product.link" class="overlay"></div>

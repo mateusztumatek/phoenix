@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{ asset('css/product.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/component.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/topbar.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/topbar.css?hash=fwaihgfawiouwa') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/gallery.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/carousel.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/contact_form.css') }}" type="text/css">

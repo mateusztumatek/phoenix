@@ -20,6 +20,7 @@
 }
 
 .product-grid4 {
+  height: 100%;
   border-radius: 0px;
   position: relative;
 }
@@ -640,7 +641,7 @@ h1 {
 }
 .my-modal .revert span {
   color: #836e5d !important;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 .my-modal .modal-dialog {
   max-width: 70%;
@@ -738,7 +739,6 @@ h1 {
 }
 
 .border-muted {
-  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 3px;
   margin-bottom: 10px;
 }
@@ -768,6 +768,36 @@ form textarea, form input {
 
 .heart-icon-active {
   color: #d6d6d6 !important;
+}
+
+.md-field label {
+  font-size: 14px !important;
+}
+
+.signs {
+  display: flex;
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  padding: 10px;
+}
+.signs .sign {
+  margin: 7px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  text-align: center;
+  padding: 15px;
+  background-color: #d6d6d6;
+  color: #836e5d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.7rem;
+  -webkit-box-shadow: 3px 3px 14px -1px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 3px 3px 14px -1px rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 3px 14px -1px rgba(0, 0, 0, 0.6);
 }
 
 /*# sourceMappingURL=product.css.map */

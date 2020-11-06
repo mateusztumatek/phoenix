@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="{{asset('css/loader.css')}}" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset('slick/slick.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('slick/slick-theme.css')}}"/>
-    <link rel="stylesheet" href="{{ asset('css/topbar.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/topbar.css?hash=wiuaghowahwaiog') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/gallery.css') }}" type="text/css">
 
 

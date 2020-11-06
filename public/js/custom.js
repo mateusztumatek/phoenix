@@ -56,16 +56,8 @@ $(document).ready(function () {
     if (lazyLoadInstance) {
         lazyLoadInstance.update();
     }
-    $('#produkty-menu').hover(function() {
+    $('#produkty-menu').on('click', function() {
         $(this).dropdown('toggle')
-    }, function() {
-        $('.dropdown-menu').hover(function () {
-
-        }, function () {
-            $('.open').removeClass('open');
-            $('.show').removeClass('show');
-
-        });
     });
 
     $('.site-loader').hide("fade");

@@ -31,7 +31,7 @@
         </transition>
         <p class="sortHeader" data-toggle="collapse" data-target="#price_collapse">Cena: </p>
         <div class="collapse w-100 show" id="price_collapse">
-            <vue-slider v-on:drag-end="changeFilters()" v-model="selectedFilters.selectedPrice" :min="0" :max="200" :height='10' :dotSize="20" :enable-cross="false">
+            <vue-slider v-on:drag-end="changeFilters()" v-model="selectedFilters.selectedPrice" :min="0" :max="50" :height='10' :dotSize="20" :enable-cross="false">
                 <template #tooltip="{ index }">
                     <span v-if="index === 0" class="vue-slider-dot-tooltip-text">{{selectedFilters.selectedPrice[0]}} zł</span>
                     <span v-else class="vue-slider-dot-tooltip-text">{{selectedFilters.selectedPrice[1]}} zł</span>
@@ -48,9 +48,9 @@
 
         <p class="mt-4 sortHeader" data-toggle="collapse" data-target="#materials_collapse">Materiały: </p>
         <div class="collapse w-100 show" id="materials_collapse">
-         <md-checkbox v-on:change="changeFilters()" class="w-100 mt-2 mb-0" v-for="(material, key) in materials" v-model="selectedFilters.selectedMaterials" :value="material.name">{{material.name}}<strong v-if="selectedFilters.selectedMaterials.length < 1">({{countFilters[key]}})</strong></md-checkbox>
+         <md-checkbox v-on:change="changeFilters()" class="w-100 mt-2 mb-0" v-for="(material, key) in materials" v-model="selectedFilters.selectedMaterials" :value="material.name">{{material.name}}<strong v-if="selectedFilters.selectedMaterials.length < 1"> ({{countFilters[key]}})</strong></md-checkbox>
         </div>
-        <p class="mt-4 sortHeader" data-toggle="collapse" data-target="#sort_collapse">Sortuj według:</p>
+        <p class="mt-4" >Sortuj według:</p>
         <div class="collapse show w-100" id="sort_collapse">
             <md-field class="m-0 pt-3">
                 <label>Wybierz opcję</label>
@@ -90,7 +90,7 @@
                 selectedFilters: {
                     selectedCollections: [],
                     selectedMaterials: [],
-                    selectedPrice: [0,150],
+                    selectedPrice: [0,50],
                     selectedSort: [],
                     selectedTags: [],
                     search: '',
@@ -165,7 +165,12 @@
               }
             },
             addTag(tag){
-                this.selectedFilters.selectedTags.push(tag);
+                var index = this.selectedFilters.selectedTags.findIndex(x => x.tag == tag.tag);
+                if(index != -1){
+                    this.selectedFilters.selectedTags.splice(index ,1);
+                }else{
+                    this.selectedFilters.selectedTags.push(tag);
+                }
             },
             isTagSelected(tag){
               if(this.selectedFilters.selectedTags.find(x => x.id == tag.id)) return true;
