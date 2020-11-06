@@ -50,7 +50,7 @@
         <div class="collapse w-100 show" id="materials_collapse">
          <md-checkbox v-on:change="changeFilters()" class="w-100 mt-2 mb-0" v-for="(material, key) in materials" v-model="selectedFilters.selectedMaterials" :value="material.name">{{material.name}}<strong v-if="selectedFilters.selectedMaterials.length < 1"> ({{countFilters[key]}})</strong></md-checkbox>
         </div>
-        <p class="mt-4" >Sortuj według:</p>
+        <p class="mt-4 mb-0" >Sortuj według:</p>
         <div class="collapse show w-100" id="sort_collapse">
             <md-field class="m-0 pt-3">
                 <label>Wybierz opcję</label>

@@ -157,7 +157,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href="/galeria" class="btn my-button-border w-100 text-center mt-2 white-color"> Zobacz galerę zdjęć</a>
+            <md-button  href="/galeria" class="md-raised md-primary white-color m-0 mt-3 w-100">Zobacz galerę zdjęć</md-button>
         </div>
         @endif
         <div class="page-content">

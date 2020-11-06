@@ -26,26 +26,26 @@
     <title>@yield('page-title')</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="{{ asset('css/mobile.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/mobile.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/app.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
 
-    <link rel="stylesheet" href="{{ asset('css/aos.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/css.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/cart.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/product.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/carousel.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/contact_form.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/component.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/admin-creator.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/aos.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/custom.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/css.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/cart.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/product.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/carousel.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/contact_form.css?hash=gushegoiesghyu47162478146?hash=fwahofawhiofh') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/component.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/admin-creator.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
 
 
-    <link rel="stylesheet" href="{{asset('css/loader.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/loader.css?hash=gushegoiesghyu47162478146')}}" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset('slick/slick.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('slick/slick-theme.css')}}"/>
-    <link rel="stylesheet" href="{{ asset('css/topbar.css?hash=wiuaghowahwaiog') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/gallery.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/topbar.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/gallery.css?hash=gushegoiesghyu47162478146') }}" type="text/css">
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -142,21 +142,28 @@
         }
     }
 </script>
+<script type="text/javascript">
+    var base_url = '{{\Illuminate\Support\Facades\URL::to('/')}}';
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.0.0/dist/lazyload.min.js"></script>
 
-<script src="{{asset('js/app.js')}}?hash=fwafwafwawa"></script>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="{{asset('js/custom.js')}}"></script>
-<script src="{{asset('js/aos.js')}}"></script>
 
+
+<script src="{{asset('js/app.js?hash=iwhagiouaghyfaiwugfaw')}}?hash=gwagawgawa"></script>
+
+
+<script src="{{asset('js/custom.js?hash=iwhagiouaghyfaiwugfaw')}}"></script>
+<script src="{{asset('js/aos.js')}}"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 <script src="{{asset('js/modernizr.custom.js')}}"></script>
 <script type="text/javascript" src="{{asset('slick/slick.js')}}"></script>
-<script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-@yield('scripts_after')
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@yield('scripts_after')
 </html>
 @endif

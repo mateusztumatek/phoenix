@@ -56,10 +56,7 @@ $(document).ready(function () {
     if (lazyLoadInstance) {
         lazyLoadInstance.update();
     }
-    $('#produkty-menu').on('click', function() {
-        $(this).dropdown('toggle')
-    });
-
+    $('#produkty-menu').click();
     $('.site-loader').hide("fade");
     $( "#slider-range" ).slider({
         range: true,

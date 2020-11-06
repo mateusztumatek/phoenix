@@ -56,7 +56,7 @@
 @endsection
 
 @section('page-title')
-    Galeria waszych zdjęć
+    Galeria Waszych zdjęć
 @endsection
 @section('page-description')
     Chcesz żeby twoje zdjęcie również było w tej galeri. Wystarczy że wyślesz je do mnie.
