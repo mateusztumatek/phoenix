@@ -498,6 +498,10 @@ h1 {
   overflow: hidden;
 }
 .product-slide .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.2rem !important;
   transition: all 400ms;
   top: -350px;
   position: absolute;

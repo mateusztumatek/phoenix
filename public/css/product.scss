@@ -327,6 +327,10 @@ h1 { font-size: 1.5em; margin: 10px; }
   position: relative;
   overflow: hidden;
   .content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.2rem !important;
     h2,p,a{
       color: white;
     }
