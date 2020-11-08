@@ -12,6 +12,8 @@ import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css' // This line here
 Vue.use(VueMaterial);
+import photo from './plugins/photo';
+Vue.prototype.$preview = new Vue(photo);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22,7 +24,9 @@ Vue.use(VueMaterial);
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
+import 'viewerjs/dist/viewer.css'
+import Viewer from 'v-viewer'
+Vue.use(Viewer);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('order-component', require('./components/orderComponent.vue').default);
 
@@ -51,6 +55,23 @@ Vue.filter('toCurrency', function (value) {
     });
     return formatter.format(value);
 });
+Vue.mixin({
+    methods:{
+        getSrc(src){
+            var validURL = (str) => {
+                var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+                    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+                    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+                    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+                return !!pattern.test(str);
+            }
+            if(validURL(src)) return src;
+            return base_url+'/str/'+src;
+        },
+    }
+})
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

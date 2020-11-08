@@ -36,3 +36,11 @@ $footer = \App\Page::where('bottom_menu_active', 1)->where('name', 'footer')->fi
     </div>
 
 </footer>
+<md-dialog :md-active.sync="$preview.dialog">
+    <div class="w-100 d-flex justify-content-center" style="max-height: 100%" @click="$preview.close()">
+        <img :src="getSrc($preview.url)" style="max-height: 100%">
+        <md-button class="md-raised md-primary" style="position: absolute; top: 10px; right:10px">
+            Zamknij
+        </md-button>
+    </div>
+</md-dialog>

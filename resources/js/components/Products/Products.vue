@@ -169,6 +169,11 @@
                 $.get(link, function( data ) {
                     $('#product_view').replaceWith(data);
                     $('#product_view').modal();
+                    setTimeout(() => {
+                        $('.hover-image').on('click', function () {
+                            Vue.prototype.$preview.show($(this).attr('src'));
+                        })
+                    },100)
                 });
             },
             changeFilter(filters, sales){

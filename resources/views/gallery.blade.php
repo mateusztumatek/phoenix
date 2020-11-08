@@ -11,7 +11,7 @@
 
             @foreach($gallery as $key => $g)
 
-                <div class="photo mt-2">
+                <div class="photo">
                     <img id="{{$key}}_image" src="{{url('/str/'.$g->image)}}">
                     <div class="content vertical-align" style="flex-wrap: wrap">
                         <div class="w-100">
@@ -42,7 +42,7 @@
                                 </div>
                                 @endif
                                 <div class="d-flex justify-content-center">
-                                    <button onclick="window.location.href = $('#{{$key}}_image').attr('src')" style="padding: 25px 10px !important; text-align: center !important;" class="my-button-border w-100 mt-1"> Zobacz zdjęcie</button>
+                                    <button @click="$preview.show('{{url('/str/'.$g->image)}}')" style="padding: 25px 10px !important; text-align: center !important;" class="my-button-border w-100 mt-1"> Zobacz zdjęcie</button>
                                 </div>
                         </div>
 

@@ -586,7 +586,7 @@ body{
   }
   .banner-header{
     text-transform: uppercase;
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 20px;
     font-weight: 900;
     color: $primary-color;
@@ -594,8 +594,9 @@ body{
 
   .banner-content{
     text-align: left !important;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 200;
+    line-height: 1.7rem;
     color: $white-color;
   }
   position: relative;
@@ -1406,4 +1407,7 @@ table{
 
     }
   }
+}
+.md-dialog{
+  z-index: 9999999 !important;
 }

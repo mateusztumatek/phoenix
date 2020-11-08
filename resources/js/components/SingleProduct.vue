@@ -110,9 +110,6 @@
 </template>
 
 <script>
-    import 'viewerjs/dist/viewer.css'
-    import Viewer from 'v-viewer'
-    Vue.use(Viewer)
     export default {
         props:['product', 'featured'],
         data(){
@@ -222,9 +219,7 @@
             changeTab(tab){
                 this.activeTab = tab;
             },
-            getSrc(src){
-                return base_url+'/str/'+src;
-            },
+
             addComment(){
                 let v =this;
                 axios.post(base_url+'/add_comment/'+this.product.id, {

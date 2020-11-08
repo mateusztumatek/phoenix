@@ -17,19 +17,24 @@
                         @php
                             $images = $prod->getProductImages();
                         @endphp
-                        <div class="xzoom-holder">
-                            <div class="xzoom-container">
-                                <img onclick="window.open($(this).attr('src'), '_BLANK')" class="xzoom" id="xzoom-default" src="{{$images[0]}}" xoriginal="{{$images[0]}}" />
+                        <div>
+                            <div class="xzoom-container" >
+                                <img class="hover-image" id="xzoom-default" src="{{$images[0]}}" >
                                     @foreach($images as $k=>$image)
                                         @if($k >= 4)
                                             @break
                                         @endif
-                                            <a href="{{$image}}" class="d-inline-block mr-3 mt-3">
-                                                <img class="xzoom-gallery" width="80" src="{{$image}}" xpreview="{{$image}}">
+                                            <a class="d-inline-block mr-3 mt-3">
+                                                <img class="hover-image" width="80" src="{{$image}}">
                                             </a>
 
                                     @endforeach
                                 <div class="signs">
+                                    @if($prod->new)
+                                    <div class="sign" style="font-size: 0.6rem; line-height:initial">
+                                        Nowość
+                                    </div>
+                                    @endif
                                     <div class="sign" style="font-size: 0.6rem; line-height:initial">
                                         {{$prod->availability}}
                                     </div>
@@ -107,13 +112,6 @@
                         </div>
 
                     @endif
-                    @if(isset($prod))
-                    <script>
-                        $(document).ready(function () {
-                            $('.xzoom, .xzoom-gallery').xzoom();
-                        })
-                    </script>
-                        @endif
                 </div>
             </div>
         </div>
@@ -133,11 +131,8 @@
             var dat = new FormData($(this));
 
         })
-    });
-    @if(isset($prod))
-    $(".xzoom, .xzoom-gallery").xzoom();
 
-    @endif
+    });
 
 </script>
     @endsection
