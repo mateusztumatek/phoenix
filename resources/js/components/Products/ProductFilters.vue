@@ -126,6 +126,7 @@
                 }
                 if(this.inputs.tags){
                     let v =this;
+                    console.log(v.tags);
                     this.inputs.tags.forEach(function (data) {
                         var obj = v.tags.find(x => x.tag == data);
                         if(obj) v.selectedFilters.selectedTags.push(obj);

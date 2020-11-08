@@ -34,8 +34,13 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $array = [];
-        $tags = DB::table('product_tags')->limit(20)->get();
-        $tags = $tags->unique('tag');
+
+        $tags = DB::table('product_tags')->limit(20);
+        $tags = $tags->get();
+        $tags = $tags->unique('tag')->values();
+        if($request->tags && $tags->where('tag', $request->tags[0])){
+            $tags = $tags->push(DB::table('product_tags')->where('tag', $request->tags[0])->first());
+        }
         $products = Product::where('active', 1)->orderBy('created_at', 'desc')->filter()->get();
        /* if (request('materials')){
             foreach ($products as $key => $product) {

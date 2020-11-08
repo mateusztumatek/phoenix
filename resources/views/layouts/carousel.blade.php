@@ -14,7 +14,7 @@
             <div class="carousel-item-content d-flex">
                 <div class="content" style="overflow: hidden">
                     <div class="text-left" >
-                        <h2 class="fadeInLeft animated delay-200 shadow-text">{{$carousel_item->name}}</h2>
+                        <h2 class="fadeInLeft animated delay-200 shadow-text">{!! $carousel_item->name !!}</h2>
                         <div class="text-white-important fadeInLeft animated delay-500 shadow-text">
                             {!! $carousel_item->content !!}
                         </div>
