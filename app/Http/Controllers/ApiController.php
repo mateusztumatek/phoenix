@@ -53,7 +53,7 @@ class ApiController extends Controller
     }
 
     public function products(Request $request){
-        $products = Product::where('active', 1)->with('categories');
+        $products = Product::where('active', 1)->with('categories')->orderBy('created_at', 'desc');
         if($request->category){
             $category = Category::where('search', $request->category)->first();
         }else{
