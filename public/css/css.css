@@ -202,8 +202,8 @@ body {
   cursor: pointer;
 }
 .my-button:hover {
-  background-color: #161616;
-  color: #d6d6d6 !important;
+ /* background-color: #161616;
+  color: #d6d6d6 !important;*/
 }
 .my-button:after {
   position: absolute;

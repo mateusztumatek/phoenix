@@ -73,19 +73,19 @@
             <div class="spinner"></div>
         </div>
     </div>
-    <div class="flex-center position-ref full-height">
+    <div class="flex-center position-ref full-height" style="padding-top: 50px">
 
 
         @include('layouts.top_navbar')
         {{--
             @include('layouts.carousel')
         --}}
-        @php
+       {{-- @php
             $static_banner = \App\Po::where('type', 'appearance_static_banner')->first();
         @endphp
         @if($static_banner)
             @include('layouts.static_banner')
-        @endif
+        @endif--}}
         {{-- <div class="w-100 text-left contra" style="padding: 70px 0px; background-image: url('{{url('/default/banner-under.jpg')}}'); background-attachment: fixed">
              <div class="container">
                  <a href="{{url('/kolekcje')}}"><h2 style="font-weight: 200">Biżuteria FANBAZOWA</h2></a>

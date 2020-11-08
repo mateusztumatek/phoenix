@@ -104,11 +104,12 @@ class HomeController extends Controller
            Cache::put('gallery', $gallery, 1200);
         }
         $services = Po::where('type', 'appearance_services')->get();
+        $static_banner = \App\Po::where('type', 'appearance_static_banner')->first();
         $data['services'] = $services;
         if($request->header('ajax')){
             $carousel = \App\Po::orderBy('created_at', 'desc')->where('type', 'appearance_carousel')->get();
 
-            return response()->json(['products' => $products, 'page' => $page, 'gallery' => $gallery, 'services' => $services, 'carousel' => $carousel]);
+            return response()->json(['products' => $products, 'page' => $page, 'gallery' => $gallery, 'services' => $services, 'carousel' => $carousel, 'static_banner' => $static_banner]);
 
         }
 
