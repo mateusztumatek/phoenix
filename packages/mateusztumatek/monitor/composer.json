@@ -1,0 +1,24 @@
+{
+    "name": "mateusz/monitor",
+    "description": "Laravel Monitor library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mateusz",
+            "email": "mateusz.bielak@interia.eu"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Mateusztumatek\\Monitor\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mateusztumatek\\Monitor\\MonitorServiceProvider"
+            ]
+        }
+    }
+}

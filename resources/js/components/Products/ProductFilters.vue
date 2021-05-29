@@ -31,7 +31,7 @@
         </transition>
         <p class="sortHeader" data-toggle="collapse" data-target="#price_collapse">Cena: </p>
         <div class="collapse w-100 show" id="price_collapse">
-            <vue-slider v-on:drag-end="changeFilters()" v-model="selectedFilters.selectedPrice" :min="0" :max="50" :height='10' :dotSize="20" :enable-cross="false">
+            <vue-slider v-on:drag-end="changeFilters()" v-model="selectedFilters.selectedPrice" :min="0" :max="100" :height='10' :dotSize="20" :enable-cross="false">
                 <template #tooltip="{ index }">
                     <span v-if="index === 0" class="vue-slider-dot-tooltip-text">{{selectedFilters.selectedPrice[0]}} zł</span>
                     <span v-else class="vue-slider-dot-tooltip-text">{{selectedFilters.selectedPrice[1]}} zł</span>
@@ -62,9 +62,9 @@
             </md-field>
         </div>
         <div v-if="tags">
-            <p class="mt-4 sortHeader" data-toggle="collapse" data-target="#tags_collapse">Tagi:</p>
-            <div class="collapse show" id="tags_collapse">
-                <span @click="addTag(tag)" class="badge badge-pill badge-primary badge-tag" :class="{'badge-active' : isTagSelected(tag)}" v-for="tag in tags">{{tag.tag}}</span>
+            <p class="mt-4 sortHeader" :class="{'collapsed': tagColapsed}" @click="tagColapsed = !tagColapsed">Tagi:</p>
+            <div id="tags_collapse">
+                <span @click="addTag(tag)" class="badge badge-pill badge-primary badge-tag" :class="{'badge-active' : isTagSelected(tag)}" v-for="tag in tagsFiltered">{{tag.tag}}</span>
             </div>
         </div>
         <md-field>
@@ -87,10 +87,11 @@
                 priceSet: false,
                 materials: [],
                 sales: false,
+                tagColapsed: false,
                 selectedFilters: {
                     selectedCollections: [],
                     selectedMaterials: [],
-                    selectedPrice: [0,50],
+                    selectedPrice: [0,100],
                     selectedSort: [],
                     selectedTags: [],
                     search: '',
@@ -98,7 +99,17 @@
                 countFilters:{},
             }
         },
-
+        computed:{
+            tagsFiltered(){
+                if(!this.tagColapsed){
+                    var tags = Object.assign([], this.tags);
+                    tags = tags.splice(0,20);
+                }else{
+                    var tags = Object.assign([], this.tags);
+                }
+                return tags.filter(x => x.id);
+            }
+        },
         mounted() {
             this.getMaterials();
             let v =this;

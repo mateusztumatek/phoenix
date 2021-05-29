@@ -53,7 +53,7 @@
 
                     </div>
                     <div class="col-md-6 mt-3 py-3">
-                        <span class="badge badge-pill badge-primary py-2 px-3 white-background" v-for="tag in product.tags">{{tag.tag}}</span>
+                        <span class="badge badge-pill badge-primary py-2 px-3 white-background" style="cursor:pointer" @click="redirect('/produkty?tags[]='+tag.tag)" v-for="tag in product.tags">{{tag.tag}}</span>
                     </div>
                     <div class="col-md-12">
                         <p class="text-center white-color font-weight-bold">Zamów lub zapytaj o ten produkt:</p>
@@ -238,6 +238,9 @@
             },
             shareProduct(){
               $('#fb_share').click();
+            },
+            redirect(url){
+                window.location.href = url;
             }
         }
     }

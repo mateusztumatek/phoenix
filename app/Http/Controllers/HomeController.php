@@ -30,19 +30,76 @@ class HomeController extends Controller
             unset($request['price_to']);
         }
     }
+    public function sendNotification(Request $request){
+        $token = $request->device_id;
+        $from = "AAAAITgh1PY:APA91bE3TaTemLNGfRGDvL91yaXIxowBlmikW_PHDgtrUbOJBVE2rbpmNN2dyW4Is2r8Fkxp4eYxIoXquFrmE_cnw1OZC4dO2_4THAiYSMxLXmb3UpF01vrAjp_FCdWQa6Bf-de3ndlL";
+        $msg = array
+        (
+            'body'  => "Testing Testing",
+            'title' => "Hi, From Raj",
+            'receiver' => 'erw',
+            'icon'  => "https://image.flaticon.com/icons/png/512/270/270014.png",/*Default Icon*/
+            'sound' => 'mySound'/*Default sound*/
+        );
 
+        $fields = array
+        (
+            'to'        => $token,
+            'notification'  => $msg
+        );
+
+        $headers = array
+        (
+            'Authorization: key=' . $from,
+            'Content-Type: application/json'
+        );
+        //#Send Reponse To FireBase Server
+        $ch = curl_init();
+        curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+        curl_setopt( $ch,CURLOPT_POST, true );
+        curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+        curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+        curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+        $result = curl_exec($ch );
+        curl_close( $ch );
+        return response()->json($result);
+    }
+    public function test(Request $request)
+    {
+        $page = Page::where('home', 1)->first();
+        $products = Product::join('collection_items', 'products.id', 'collection_items.product_id')->join('collections', 'collection_items.collection_id', 'collections.id')->where('collections.name', 'Home')->where('products.active', 1)->select('products.*')->get();
+        foreach ($products as $product) {
+            $product->init();
+        }
+        $gallery = Cache::get('gallery');
+        if (!$gallery) {
+            $gallery = Gallery::with('prod')->take(10)->get();
+            Cache::put('gallery', $gallery, 1200);
+        }
+        $services = Po::where('type', 'appearance_services')->get();
+        $static_banner = \App\Po::where('type', 'appearance_static_banner')->first();
+        $data['services'] = $services;
+        if ($request->header('ajax')) {
+            $carousel = \App\Po::orderBy('created_at', 'desc')->where('type', 'appearance_carousel')->get();
+
+            return response()->json(['products' => $products, 'page' => $page, 'gallery' => $gallery, 'services' => $services, 'carousel' => $carousel, 'static_banner' => $static_banner]);
+
+        }
+
+        return view('test', compact('products', 'page', 'gallery'));
+    }
     public function index(Request $request)
     {
         $array = [];
-
-        $tags = DB::table('product_tags')->limit(20);
+        $tags = DB::table('product_tags');
         $tags = $tags->get();
         $tags = $tags->unique('tag')->values();
         if($request->tags && $tags->where('tag', $request->tags[0])){
             $tags = $tags->push(DB::table('product_tags')->where('tag', $request->tags[0])->first());
         }
-        $products = Product::where('active', 1)->orderBy('created_at', 'desc')->filter()->get();
-       /* if (request('materials')){
+        $products = Product::where('active', 1)->orderBy('created_at', 'desc')->with('materials', 'tags')->filter()->get();
+        /* if (request('materials')){
             foreach ($products as $key => $product) {
                 $check = false;
                 foreach (request('materials') as $material){
@@ -56,7 +113,6 @@ class HomeController extends Controller
         foreach ($products as $product){
             $product->init();
         }
-
         /*foreach ($products as $product) {
             array_push($array, $product);
         }
@@ -79,7 +135,7 @@ class HomeController extends Controller
         }
         $tags = DB::table('product_tags')->join('product_categories', 'product_tags.product_id', 'product_categories.product_id')->where('category_id', $category->id)->select('product_tags.*')->limit(20)->get();
         $tags = $tags->unique('tag');
-        $products = Product::join('product_categories', 'products.id', 'product_categories.product_id')->where('category_id', $category->id)->where('products.active', 1)->orderBy('created_at', 'desc')->select('products.*')->filter()->get();
+        $products = Product::join('product_categories', 'products.id', 'product_categories.product_id')->with('materials', 'tags')->where('category_id', $category->id)->where('products.active', 1)->orderBy('created_at', 'desc')->select('products.*')->filter()->get();
         foreach ($products as $product){
             $product->init();
         }

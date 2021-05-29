@@ -22,6 +22,7 @@ class Product extends Model
         $this->profit_price = $this->price + floatval(setting('admin.profit'));
      }
      public function getHasGalleryAttribute(){
+       return false;
        return $this->hasMany('App\Gallery')->count();
      }
      public function getSlugAttribute(){
@@ -132,8 +133,6 @@ class Product extends Model
          Storage::deleteDirectory('projects/'.$folder_path);
      }
      public function init(){
-       $this->load('materials');
-       $this->setAttribute('tags', $this->getTags());
        $this->setAttribute('link', $this->id.'/'.Help::slugify($this->name));
        /*if($this->profit != NULL){
            if($this->profit > 0){

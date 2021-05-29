@@ -82,5 +82,7 @@ Route::group(['middleware' => 'Cart'], function(){
     Route::get('/', function (){
         return view('building');
     });
+    Route::get('/test', 'HomeController@test');
+    Route::post('/test-notification', 'HomeController@sendNotification');
 });
 Route::get('/', 'HomeController@home')->name('home');

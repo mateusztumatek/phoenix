@@ -13,7 +13,7 @@ use App\Page;
 class ProductController extends Controller
 {
     public function index($id, $slug){
-        $product = Product::where('id', $id)->first();
+        $product = Product::where('id', $id)->with('materials', 'tags')->first();
         $product->count = $product->count + 1;
         $product->update();
         $product->init();
@@ -29,7 +29,7 @@ class ProductController extends Controller
        return view('products.index', compact('product', 'featured_products'));
     }
     public function show($id, $slug){
-        $prod = Product::where('id', $id)->first();
+        $prod = Product::where('id', $id)->with('materials', 'tags')->first();
         $prod->count = $prod->count + 1;
         $prod->update();
         $prod->init();
